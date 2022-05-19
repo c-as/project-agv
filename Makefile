@@ -1,7 +1,7 @@
 #build
 BUILD			= build
-LIBS_DIR		= lib
-TARGET			= main.c
+LIBS_DIR	= lib
+TARGET		= main.c
 LIBS			= $(wildcard $(LIBS_DIR)/*.c)
 OBJS			= $(LIBS:.c=.o)
 OBJS			+= $(TARGET:.c=.o)
@@ -12,11 +12,10 @@ FLAGS			= -D F_CPU=16000000UL
 FLAGS			+= -D DEBUG_EN=1
 
 # DEFINE
-PORT			= COM3
-DEVICE			= atmega328p
-PROGRAMMER		= arduino
-#BAUD			= 57600
-BAUD			= 115200
+PORT				= COM3#					Op welke usb poort je arduino zit
+DEVICE			= atmega2560#		Welke chip je arduino heeft
+PROGRAMMER	= arduino
+BAUD				= 115200
 COMPILE			= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
 
 .PHONY: clean upload
