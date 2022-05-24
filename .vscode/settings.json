@@ -1,0 +1,4 @@
+{
+  "makefile.extensionOutputFolder": "./.vscode",
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
+}
