@@ -2,3 +2,6 @@
 *.o
 *.elf
 *.hex
+*.layout
+/bin
+/obj
