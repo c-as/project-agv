@@ -1,23 +1,23 @@
 #build
-BUILD			= build
+BUILD		= build
 LIBS_DIR	= lib
 TARGET		= main.c
-LIBS			= $(wildcard $(LIBS_DIR)/*.c)
-OBJS			= $(LIBS:.c=.o)
-OBJS			+= $(TARGET:.c=.o)
-ASMS			= $(OBJS:.o=.asm)
+LIBS		= $(wildcard $(LIBS_DIR)/*.c)
+OBJS		= $(LIBS:.c=.o)
+OBJS		+= $(TARGET:.c=.o)
+ASMS		= $(OBJS:.o=.asm)
 
 # DEFINE
-FLAGS			= -D F_CPU=16000000UL
-FLAGS			+= -D DEBUG_EN=1
+FLAGS		= -D F_CPU=16000000UL
+FLAGS		+= -D DEBUG_EN=1
 FLAGS 		+= -D BAUD=9600
 
 # DEFINE
-PORT				= COM3#					Op welke usb poort je arduino zit
-DEVICE			= atmega2560#		Welke chip je arduino heeft
-PROGRAMMER			= wiring
-BAUD				= 115200
-COMPILE			= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
+PORT		= COM3#					Op welke usb poort je arduino zit
+DEVICE		= atmega2560#		Welke chip je arduino heeft
+PROGRAMMER	= wiring
+BAUD		= 115200
+COMPILE		= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
 
 .PHONY: clean upload
 
