@@ -1,174 +1,131 @@
-/*
- * h_bridge.c - XvR 2020
- *
- * Use 8-bit timer. Uses interrupts in order to be able
- * to use the pins on the multifunction shield
- */
-
 #include <avr/io.h>
+#include <util/delay.h>
 #include <avr/interrupt.h>
-#include "h_bridge.h"
+#include "motorenDefines.h"
 
-extern int motorselector;
-
-ISR(TIMER0_OVF_vect)
+void init_motoren()
 {
-	if (OCR0A == 0 && OCR0B == 0)
-	{
-		if(motorselector == 1)
-		{
-		PORT_RPWM1 &= ~(1<<PIN_RPWM1);
-		PORT_LPWM1 &= ~(1<<PIN_LPWM1);
-		}
-		if(motorselector == 2)
-		{
-		PORT_RPWM2 &= ~(1<<PIN_RPWM2);
-		PORT_LPWM2 &= ~(1<<PIN_LPWM2);
-		}
-		if(motorselector == 3)
-		{
-		PORT_RPWM3 &= ~(1<<PIN_RPWM3);
-		PORT_LPWM3 &= ~(1<<PIN_LPWM3);
-		}
-		if(motorselector == 4)
-		{
-		PORT_RPWM4 &= ~(1<<PIN_RPWM4);
-		PORT_LPWM4 &= ~(1<<PIN_LPWM4);
-		}
-	}
-	else if (OCR0A != 0)
-	{
-		if(motorselector == 1)
-		{
-		PORT_LPWM1 &= ~(1<<PIN_LPWM1);
-		PORT_RPWM1 |= (1<<PIN_RPWM1);
-		}
-		if(motorselector == 2)
-		{
-		PORT_LPWM2 &= ~(1<<PIN_LPWM2);
-		PORT_RPWM2 |= (1<<PIN_RPWM2);
-		}
-		if(motorselector == 3)
-		{
-		PORT_LPWM3 &= ~(1<<PIN_LPWM3);
-		PORT_RPWM3 |= (1<<PIN_RPWM3);
-		}
-		if(motorselector == 4)
-		{
-		PORT_LPWM4 &= ~(1<<PIN_LPWM4);
-		PORT_RPWM4 |= (1<<PIN_RPWM4);
-		}
-	}
-	else if (OCR0B != 0)
-	{
-		if(motorselector == 1)
-		{
-		PORT_RPWM1 &= ~(1<<PIN_RPWM1);
-		PORT_LPWM1 |= (1<<PIN_LPWM1);
-		}
-		if(motorselector == 2)
-		{
-		PORT_RPWM2 &= ~(1<<PIN_RPWM2);
-		PORT_LPWM2 |= (1<<PIN_LPWM2);
-		}
-		if(motorselector == 3)
-		{
-		PORT_RPWM3 &= ~(1<<PIN_RPWM3);
-		PORT_LPWM3 |= (1<<PIN_LPWM3);
-		}
-		if(motorselector == 4)
-		{
-		PORT_RPWM4 &= ~(1<<PIN_RPWM4);
-		PORT_LPWM4 |= (1<<PIN_LPWM4);
-		}
-	}
+    DDR_LPWM1 |= (1 << PIN_LPWM1);
+    DDR_LPWM2 |= (1 << PIN_LPWM2);
+    DDR_LPWM3 |= (1 << PIN_LPWM3);
+    DDR_LPWM4 |= (1 << PIN_LPWM4);
+    DDR_RPWM1 |= (1 << PIN_RPWM1);
+    DDR_RPWM2 |= (1 << PIN_RPWM2);
+    DDR_RPWM3 |= (1 << PIN_RPWM3);
+    DDR_RPWM4 |= (1 << PIN_RPWM4);
 }
 
-ISR(TIMER0_COMPA_vect)
+
+/*
+de motor is de motor die je wilt aansturen
+de kant is welke kant de motor op draait
+1 = met de klok mee(CW)
+-1 = tegen de klok in(CCW)
+*/
+void motor(int motor, int kant)
 {
-	if (OCR0A != 255)
-	{
-		if(motorselector == 1)
-		{
-		PORT_RPWM1 &= ~(1<<PIN_RPWM1);
-		}
-		if(motorselector == 2)
-		{
-		PORT_RPWM2 &= ~(1<<PIN_RPWM2);
-		}
-		if(motorselector == 3)
-		{
-		PORT_RPWM3 &= ~(1<<PIN_RPWM3);
-		}
-		if(motorselector == 4)
-		{
-		PORT_RPWM4 &= ~(1<<PIN_RPWM4);
-		}
-	}
+    if (kant == 1)
+    {
+        switch (motor)
+        {
+        case 1:
+            PORT_LPWM1 &= ~(1 << PIN_LPWM1);
+            PORT_RPWM1 |= (1 << PIN_RPWM1);
+            break;
+        case 2: 
+            PORT_LPWM2 &= ~(1 << PIN_LPWM2);
+            PORT_RPWM2 |= (1 << PIN_RPWM2);
+            break;
+        case 3: 
+            PORT_LPWM3 &= ~(1 << PIN_LPWM3);
+            PORT_RPWM3 |= (1 << PIN_RPWM3);
+            break;        
+        case 4: 
+            PORT_LPWM4 &= ~(1 << PIN_LPWM4);
+            PORT_RPWM4 |= (1 << PIN_RPWM4);
+            break;
+        }
+    }
+    else if (kant == -1)
+    {
+        switch (motor)
+        {
+        case 1:
+            PORT_LPWM1 |= (1 << PIN_LPWM1);
+            PORT_RPWM1 &= ~(1 << PIN_RPWM1);
+            break;
+        case 2: 
+            PORT_LPWM2 |= (1 << PIN_LPWM2);
+            PORT_RPWM2 &= ~(1 << PIN_RPWM2);
+            break;
+        case 3: 
+            PORT_LPWM3 |= (1 << PIN_LPWM3);
+            PORT_RPWM3 &= ~(1 << PIN_RPWM3);
+            break;        
+        case 4: 
+            PORT_LPWM4 |= (1 << PIN_LPWM4);
+            PORT_RPWM4 &= ~(1 << PIN_RPWM4);
+            break;
+        }
+    }
 }
 
-ISR(TIMER0_COMPB_vect)
+// 1 is vooruit(postitief langs de x-as)
+//-1 is achteruit(negatief langs de x-as)
+void RijdenX_as(int kant)
 {
-	if (OCR0B != 255)
-	{
-		if(motorselector == 1)
-		{
-		PORT_LPWM1 &= ~(1<<PIN_LPWM1);
-		}
-		if(motorselector == 2)
-		{
-		PORT_LPWM2 &= ~(1<<PIN_LPWM2);
-		}
-		if(motorselector == 3)
-		{
-		PORT_LPWM3 &= ~(1<<PIN_LPWM3);
-		}
-		if(motorselector == 4)
-		{
-		PORT_LPWM4 &= ~(1<<PIN_LPWM4);
-		}
-	}
+    if (kant == 1)
+    {
+        motor(1, -1);
+        motor(2, 1);
+        motor(3, -1);
+        motor(4, 1);
+    }
+    if (kant == -1)
+    {
+        motor(1, 1);
+        motor(2, -1);
+        motor(3, 1);
+        motor(4, -1);
+    }
 }
 
-void init_h_bridge(void)
+// 1 is vooruit(postitief langs de y-as)
+//-1 is achteruit(negatief langs de y-as)
+void RijdenY_as(int kant)
 {
-	// Config pins as output
-	DDR_RPWM1 |= (1<<PIN_RPWM1);
-	DDR_LPWM1 |= (1<<PIN_LPWM1);
-
-	// Output low
-	PORT_RPWM1 &= ~(1<<PIN_RPWM1);
-	PORT_LPWM1 &= ~(1<<PIN_LPWM1);
-
-	// Use mode 0, clkdiv = 64
-	TCCR0A = 0;
-	TCCR0B = (0<<CS02) | (1<<CS01) | (1<<CS00);
-
-	// Disable PWM output
-	OCR0A = 0;
-	OCR0B = 0;
-
-	// Interrupts on OCA, OCB and OVF
-	TIMSK0 = (1<<OCIE0B) | (1<<OCIE0A) | (1<<TOIE0);
-
-	sei();
+    if (kant == 1)
+    {
+        motor(1, -1);
+        motor(2, -1);
+        motor(3, 1);
+        motor(4, 1);
+    }
+    if (kant == -1)
+    {
+        motor(1, 1);
+        motor(2, 1);
+        motor(3, -1);
+        motor(4, -1);
+    }
 }
 
-void h_bridge_set_percentage(signed char percentage)
+// 1 is met de klok mee(CW)
+//-1 is tegen de klok in(CCW)
+void Draaien(int kant)
 {
-	if (percentage >= -100 && percentage <= 100)
-	{
-		if (percentage >= 0)
-		{
-			// Disable LPWM, calculate RPWM
-			OCR0B = 0;
-			OCR0A = (255*percentage)/100;
-		}
-		else // percentage < 0
-		{
-			// Disable RPWM, calculate LPWM
-			OCR0A = 0;
-			OCR0B = (255*percentage)/-100;
-		}
-	}
+    if (kant == 1)
+    {
+        motor(1, -1);
+        motor(2, -1);
+        motor(3, -1);
+        motor(4, -1);
+    }
+    if (kant == -1)
+    {
+        motor(1, 1);
+        motor(2, 1);
+        motor(3, 1);
+        motor(4, 1);
+    }
 }
