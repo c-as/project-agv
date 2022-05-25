@@ -21,7 +21,7 @@ COMPILE			= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
 
 .PHONY: clean upload
 
-default: compile upload
+default: compile upload monitor
 
 %.asm: %.c
 	$(COMPILE) -S -c $< -o $@
@@ -38,6 +38,9 @@ asm: clean-all $(ASMS)
 
 upload:
 	avrdude -v -D -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -U flash:w:$(BUILD).hex:i
+
+monitor:#voor deze moet je arduino-cli geinstalleerd hebben https://github.com/arduino/arduino-cli/
+	arduino-cli monitor -p ${PORT}
 
 clean:
 	-rm *.o
