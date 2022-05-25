@@ -39,3 +39,26 @@ void init_print()
     uart_init();
     stdout = &output;
 }
+
+void print_binary(int number, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        int n = number >> (size - i - 1);
+
+        if (i % 4 == 0)
+        {
+            printf(" ");
+        }
+
+        if (n & 1)
+        {
+            printf("1");
+        }
+        else
+        {
+            printf("0");
+        }
+    }
+    printf("\n");
+}
