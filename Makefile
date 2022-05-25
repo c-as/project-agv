@@ -10,6 +10,7 @@ ASMS			= $(OBJS:.o=.asm)
 # DEFINE
 FLAGS			= -D F_CPU=16000000UL
 FLAGS			+= -D DEBUG_EN=1
+FLAGS 		+= -D BAUD=9600
 
 # DEFINE
 PORT				= COM3#					Op welke usb poort je arduino zit
