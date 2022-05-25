@@ -36,7 +36,7 @@ compile: clean-all $(OBJS)
 asm: clean-all $(ASMS)
 
 upload:
-	avrdude -v -D -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -Uflash:w:$(BUILD).hex:i
+	avrdude -v -D -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -U flash:w:$(BUILD).hex:i
 
 clean:
 	-rm *.o
