@@ -15,7 +15,7 @@ FLAGS 		+= -D BAUD=9600
 # DEFINE
 PORT				= COM3#					Op welke usb poort je arduino zit
 DEVICE			= atmega2560#		Welke chip je arduino heeft
-PROGRAMMER	= arduino
+PROGRAMMER			= wiring
 BAUD				= 115200
 COMPILE			= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
 
