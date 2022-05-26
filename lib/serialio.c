@@ -9,6 +9,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/setbaud.h>
+#include <util/delay.h>
 
 int uart_putchar(char, FILE *);
 void uart_init();
@@ -40,7 +41,17 @@ void init_print()
     stdout = &output;
 }
 
-void print_binary(int number, int size)
+void serialio_test()
+{
+    init_print();
+
+    while (1)
+    {
+        printf("test\n");
+        _delay_ms(500);
+    }
+}
+
 {
     for (int i = 0; i < size; i++)
     {
