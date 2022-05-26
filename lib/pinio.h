@@ -80,6 +80,7 @@ typedef enum
 typedef enum
 {
     PINMODE_INPUT,
+    PINMODE_INPUT_PULLUP,
     PINMODE_OUTPUT,
 } PinMode;
 

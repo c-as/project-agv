@@ -156,9 +156,15 @@ void pin_set_mode(Pin pin, PinMode mode)
     {
     case PINMODE_INPUT:
         *pin.pDDR &= ~(1 << pin.pin);
+        *pin.pPORT &= ~(1 << pin.pin);
+        break;
+    case PINMODE_INPUT_PULLUP:
+        *pin.pDDR &= ~(1 << pin.pin);
+        *pin.pPORT |= (1 << pin.pin);
         break;
     case PINMODE_OUTPUT:
         *pin.pDDR |= (1 << pin.pin);
+        *pin.pPORT &= ~(1 << pin.pin);
         break;
     }
 }
@@ -173,7 +179,10 @@ void pin_set_output(Pin pin, bool output)
 
 bool pin_get_input(Pin pin)
 {
-    return *pin.pPIN & (1 << pin.pin);
+    if (*pin.pPORT & (1 << pin.pin))
+        return !(*pin.pPIN & (1 << pin.pin));
+    else
+        return *pin.pPIN & (1 << pin.pin);
 }
 
 void pinio_test()
