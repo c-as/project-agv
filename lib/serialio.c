@@ -43,7 +43,7 @@ void serialio_init()
 
 void serialio_test()
 {
-    init_print();
+    serialio_init();
 
     while (1)
     {
