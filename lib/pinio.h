@@ -1,6 +1,8 @@
 #ifndef _PINIO_H_
 #define _PINIO_H_
 
+#include <inttypes.h>
+
 typedef enum
 {
     MEGA_PIN_D4,
