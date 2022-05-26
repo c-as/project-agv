@@ -35,7 +35,7 @@ int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-void init_print()
+void serialio_init()
 {
     uart_init();
     stdout = &output;
@@ -52,6 +52,7 @@ void serialio_test()
     }
 }
 
+void printb(int number, int size)
 {
     for (int i = 0; i < size; i++)
     {
