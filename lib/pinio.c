@@ -171,6 +171,11 @@ void pin_set_output(Pin pin, bool output)
         *pin.pPORT &= ~(1 << pin.pin);
 }
 
+bool pin_get_input(Pin pin)
+{
+    return *pin.pPIN & (1 << pin.pin);
+}
+
 void pinio_test()
 {
     // make a led blink on pin A12

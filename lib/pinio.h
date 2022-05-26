@@ -94,6 +94,7 @@ typedef struct
 Pin get_pin(MegaPins mega_pin);
 void pin_set_mode(Pin pin, PinMode mode);
 void pin_set_output(Pin pin, bool output);
+bool pin_get_input(Pin pin);
 void pinio_test();
 
 #endif
