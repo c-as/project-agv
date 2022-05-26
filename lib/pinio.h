@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-typedef enum
+typedef enum // lijst van alle gebruikelijke pins op de arduino mega
 {
     MEGA_PIN_D4,
     MEGA_PIN_D0,
@@ -77,14 +77,14 @@ typedef enum
     MEGA_PIN_A0,
 } MegaPins;
 
-typedef enum
+typedef enum // opties voor de werking van elke pin
 {
     PINMODE_INPUT,
     PINMODE_INPUT_PULLUP,
     PINMODE_OUTPUT,
 } PinMode;
 
-typedef struct
+typedef struct // pakket van data voor het gebruik van een specifieke pin
 {
     uint8_t *pDDR;
     uint8_t *pPIN;

@@ -3,7 +3,7 @@
 #include <util/delay.h>
 #include "pinio.h"
 
-Pin get_pin(MegaPins mega_pin)
+Pin get_pin(MegaPins mega_pin) // zoekt de DDR-, PIN-, PORT- registers en het PIN nummer voor je bij elkaar
 {
     switch (mega_pin)
     {
@@ -160,7 +160,7 @@ void pin_set_mode(Pin pin, PinMode mode)
         break;
     case PINMODE_INPUT_PULLUP:
         *pin.pDDR &= ~(1 << pin.pin);
-        *pin.pPORT |= (1 << pin.pin);
+        *pin.pPORT |= (1 << pin.pin); // om de interne pullup weerstand te gebruiken moet de port hoog gezet worden
         break;
     case PINMODE_OUTPUT:
         *pin.pDDR |= (1 << pin.pin);
@@ -169,7 +169,7 @@ void pin_set_mode(Pin pin, PinMode mode)
     }
 }
 
-void pin_set_output(Pin pin, bool output)
+void pin_set_output(Pin pin, bool output) // zet de pin hoog(1) of laag(0)
 {
     if (output)
         *pin.pPORT |= (1 << pin.pin);
@@ -177,17 +177,16 @@ void pin_set_output(Pin pin, bool output)
         *pin.pPORT &= ~(1 << pin.pin);
 }
 
-bool pin_get_input(Pin pin)
+bool pin_get_input(Pin pin) // kijk of pin hoog(1) of laag(0) is
 {
-    if (*pin.pPORT & (1 << pin.pin))
-        return !(*pin.pPIN & (1 << pin.pin));
+    if (*pin.pPORT & (1 << pin.pin))          // kijk of de interne pullup weerstand wordt gebruikt
+        return !(*pin.pPIN & (1 << pin.pin)); // als dat zo is dan moet de waarde omgedraaid worden
     else
         return *pin.pPIN & (1 << pin.pin);
 }
 
-void pinio_test()
+void pinio_test() // knipper led op poort A12
 {
-    // make a led blink on pin A12
     Pin pin = get_pin(MEGA_PIN_A12);
     pin_set_mode(pin, PINMODE_OUTPUT);
 

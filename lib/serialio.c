@@ -35,13 +35,13 @@ int uart_putchar(char c, FILE *stream)
     return 0;
 }
 
-void serialio_init()
+void serialio_init() // begin de communicatie
 {
     uart_init();
     stdout = &output;
 }
 
-void serialio_test()
+void serialio_test() // elke 500ms wordt er de tekst "test" via de usb verstuurd
 {
     serialio_init();
 
@@ -52,7 +52,7 @@ void serialio_test()
     }
 }
 
-void printb(int number, int size)
+void printb(int number, int size) // geeft je nummers weer als eenen en nullen met elke 4 tekens een spatie
 {
     for (int i = 0; i < size; i++)
     {
