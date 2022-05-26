@@ -7,6 +7,6 @@ int uart_putchar(char c, FILE *stream);
 void uart_init(void);
 void serialio_init();
 void serialio_test();
-void print_binary(int number, int size);
+void printb(int number, int size);
 
 #endif
