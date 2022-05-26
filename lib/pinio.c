@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <stdbool.h>
 #include <util/delay.h>
-#include "basicio.h"
+#include "pinio.h"
 
 Pin get_pin(MegaPins mega_pin)
 {
@@ -171,7 +171,7 @@ void pin_set_output(Pin pin, bool output)
         *pin.pPORT &= ~(1 << pin.pin);
 }
 
-void basicio_test()
+void pinio_test()
 {
     // make a led blink on pin A12
     Pin pin = get_pin(MEGA_PIN_A12);

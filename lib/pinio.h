@@ -1,5 +1,5 @@
-#ifndef _MEGAIO_H_
-#define _MEGAIO_H_
+#ifndef _PINIO_H_
+#define _PINIO_H_
 
 typedef enum
 {
