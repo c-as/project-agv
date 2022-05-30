@@ -2,6 +2,7 @@
 #define _PINIO_H_
 
 #include <inttypes.h>
+#include <stdbool.h>
 
 typedef enum // lijst van alle gebruikelijke pins op de arduino mega
 {
