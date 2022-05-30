@@ -1,11 +1,13 @@
 #build
-BUILD		= build
+BUILD_DIR	= build
+BUILD		= $(BUILD_DIR)/build
 LIBS_DIR	= lib
 TARGET		= main.c
 LIBS		= $(wildcard $(LIBS_DIR)/*.c)
-OBJS		= $(LIBS:.c=.o)
-OBJS		+= $(TARGET:.c=.o)
-ASMS		= $(OBJS:.o=.asm)
+LIBS		+= $(wildcard $(LIBS_DIR)/**/*.c)
+OBJS		= $(patsubst  %, build/%, $(LIBS:.c=.o))
+OBJS		+= $(patsubst  %, build/%, $(TARGET:.c=.o))
+ASMS		= $(patsubst  %, build/%, $(OBJS:.o=.asm))
 
 # DEFINE
 FLAGS		= -D F_CPU=16000000UL
@@ -23,10 +25,12 @@ COMPILE		= avr-gcc -Wall -Os -mmcu=$(DEVICE) -std=gnu99
 
 default: compile upload monitor
 
-%.asm: %.c
+$(BUILD_DIR)/%.asm: %.c
+	mkdir -p $(@D)
 	$(COMPILE) -S -c $< -o $@
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c
+	mkdir -p $(@D)
 	$(COMPILE) $(FLAGS) -c $< -o $@
 
 compile: clean-all $(OBJS)
@@ -43,13 +47,11 @@ monitor:#voor deze moet je arduino-cli geinstalleerd hebben https://github.com/a
 	arduino-cli monitor -p ${PORT}
 
 clean:
-	-rm *.o
-	-rm *.elf
-	-rm *.hex
-	-rm *.s
-	-rm *.asm
+	-rm ${BUILD_DIR}/*.o
+	-rm ${BUILD_DIR}/*.elf
+	-rm ${BUILD_DIR}/*.hex
+	-rm ${BUILD_DIR}/*.s
+	-rm ${BUILD_DIR}/*.asm
 
-clean-all: clean
-	-rm $(LIBS_DIR)/*.o
-	-rm $(LIBS_DIR)/*.s
-	-rm $(LIBS_DIR)/*.asm
+clean-all: 
+	-rm -rf ${BUILD_DIR}
