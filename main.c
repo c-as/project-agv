@@ -1,19 +1,22 @@
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+#include "lib/pinio.h"
 #include "lib/serialio.h"
-#include "motor code/motorenDefines.h"
-#include "init.c"
-#include "motor code/motoren.c"
+#include "lib/tof/tof.h"
 
-int motorselector = 0;
-
-void test()
+void init()
 {
+    serialio_init();
+    tof_init();
 }
+
+void start()
+{
+    // pinio_test();
+    // serialio_test();
+    tof_test();
+}
+
 int main()
 {
-    init_print();
     init();
-    test();
+    start();
 }
