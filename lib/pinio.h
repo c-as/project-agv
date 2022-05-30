@@ -154,10 +154,10 @@ typedef enum // opties voor de werking van elke pin
 
 typedef struct // pakket van data voor het gebruik van een specifieke pin
 {
-    uint8_t *pDDR;
-    uint8_t *pPIN;
-    uint8_t *pPORT;
-    uint8_t pin;
+    volatile uint8_t *pDDR;
+    volatile uint8_t *pPIN;
+    volatile uint8_t *pPORT;
+    volatile uint8_t pin;
 } Pin;
 
 void pin_set_mode(Pin pin, PinMode mode);
