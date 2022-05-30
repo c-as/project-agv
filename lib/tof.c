@@ -9,8 +9,8 @@
 
 void tof_init()
 {
-    pin_set_mode(get_pin(MEGA_PIN_D20), PINMODE_INPUT_PULLUP);
-    pin_set_mode(get_pin(MEGA_PIN_D22), PINMODE_INPUT_PULLUP);
+    pin_set_mode(MEGA_PIN_D20, PINMODE_INPUT_PULLUP);
+    pin_set_mode(MEGA_PIN_D22, PINMODE_INPUT_PULLUP);
 
     i2c_init();
     initMillis();
