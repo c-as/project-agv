@@ -132,7 +132,7 @@ void ldr_volgen()
     while (1)
     {
         // LDR > 100
-        if()
+        if(1)
         {
             // ToF 1 en 2 > 20
             if (1)
