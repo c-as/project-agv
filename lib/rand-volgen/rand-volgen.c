@@ -2,19 +2,20 @@
  */
 
 #include <avr/io.h>
+#include "defines.h"
 
 void motor1(int beweeg) // pins moeten nog goed worden gedefined
 {
-    if(beweeg == 1)
+    if (beweeg == 1)
     {
         PORT_LPWM |= (1 << PIN_LPWM);
     }
-    else if(beweeg == 0)
+    else if (beweeg == 0)
     {
         PORT_LPWM &= ~(1 << PIN_LPWM);
         PORT_RPWM &= ~(1 << PIN_RPWM);
     }
-    else if(beweeg == -1)
+    else if (beweeg == -1)
     {
         PORT_RPWM |= (1 << PIN_RPWM);
     }
@@ -22,16 +23,16 @@ void motor1(int beweeg) // pins moeten nog goed worden gedefined
 
 void motor2(int beweeg) // pins moeten nog goed worden gedefined
 {
-    if(beweeg == 1)
+    if (beweeg == 1)
     {
         PORT_LPWM |= (1 << PIN_LPWM);
     }
-    else if(beweeg == 0)
+    else if (beweeg == 0)
     {
         PORT_LPWM &= ~(1 << PIN_LPWM);
         PORT_RPWM &= ~(1 << PIN_RPWM);
     }
-    else if(beweeg == -1)
+    else if (beweeg == -1)
     {
         PORT_RPWM |= (1 << PIN_RPWM);
     }
@@ -39,16 +40,16 @@ void motor2(int beweeg) // pins moeten nog goed worden gedefined
 
 void motor3(int beweeg) // pins moeten nog goed worden gedefined
 {
-    if(beweeg == 1)
+    if (beweeg == 1)
     {
         PORT_LPWM |= (1 << PIN_LPWM);
     }
-    else if(beweeg == 0)
+    else if (beweeg == 0)
     {
         PORT_LPWM &= ~(1 << PIN_LPWM);
         PORT_RPWM &= ~(1 << PIN_RPWM);
     }
-    else if(beweeg == -1)
+    else if (beweeg == -1)
     {
         PORT_RPWM |= (1 << PIN_RPWM);
     }
@@ -56,16 +57,16 @@ void motor3(int beweeg) // pins moeten nog goed worden gedefined
 
 void motor4(int beweeg) // pins moeten nog goed worden gedefined
 {
-    if(beweeg == 1)
+    if (beweeg == 1)
     {
         PORT_LPWM |= (1 << PIN_LPWM);
     }
-    else if(beweeg == 0)
+    else if (beweeg == 0)
     {
         PORT_LPWM &= ~(1 << PIN_LPWM);
         PORT_RPWM &= ~(1 << PIN_RPWM);
     }
-    else if(beweeg == -1)
+    else if (beweeg == -1)
     {
         PORT_RPWM |= (1 << PIN_RPWM);
     }
@@ -98,13 +99,13 @@ void bijsturenNaarRandToe()
 void RandVolgen()
 {
     // ToF 3 < 20
-    if()
+    if (1)
     {
-        bijsturenRandAf();      // Moet er nog onder: ToF 3 == 20 ?
+        bijsturenRandAf(); // Moet er nog onder: ToF 3 == 20 ?
     }
 
     // ToF 3 > 20
-    else if()
+    else if (1)
     {
         bijsturenNaarRandToe(); // Moet er nog onder: ToF 3 == 20 ?
     }
@@ -112,7 +113,7 @@ void RandVolgen()
 
 int main(void)
 {
-    while(1)
+    while (1)
     {
         RandVolgen();
     }
