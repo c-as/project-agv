@@ -79,6 +79,19 @@ void init_adc(void)
 //    }
 //}
 
+int get_light(int LDR) // choose which ldr to read
+{
+    ADMUX = 0b01000000; // read from A0: LDR boven (1)
+    if (LDR)
+    {
+        ADMUX = 0b01000001; // read from A1: LDR beneden (2)
+    }
+    ADCSRA |= (1 << ADSC);                 // start conversion
+    loop_until_bit_is_clear(ADCSRA, ADSC); // wait for conversion to finish
+
+    return ADC;
+}
+
 void ldr_vergelijken()
 {
     // LDR 1 < 2
@@ -113,19 +126,6 @@ void ldr_vergelijken()
         break;
     }
 
-}
-
-int get_light(int LDR)         // choose which ldr to read
-{
-    ADMUX = 0b01000000;         //read from A0: LDR boven (1)
-    if(LDR)
-    {
-        ADMUX = 0b01000001;     //read from A1: LDR beneden (2)
-    }
-    ADCSRA |= (1<<ADSC);        //start conversion
-    loop_until_bit_is_clear(ADCSRA,ADSC);   //wait for conversion to finish
-
-    return ADC;
 }
 
 void ldr_volgen()
