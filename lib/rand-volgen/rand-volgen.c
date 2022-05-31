@@ -110,13 +110,3 @@ void RandVolgen()
         bijsturenNaarRandToe(); // Moet er nog onder: ToF 3 == 20 ?
     }
 }
-
-int main(void)
-{
-    while (1)
-    {
-        RandVolgen();
-    }
-
-    return 0;
-}

@@ -98,14 +98,3 @@ void ldr_volgen()
         }
     }
 }
-
-int main(void)
-{
-    init_adc();
-
-    while (1)
-    {
-    }
-
-    return 0;
-}
