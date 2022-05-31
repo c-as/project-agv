@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#include "motorenDefines.h"
+#include "motoren.h"
 
 void init_motoren()
 {
