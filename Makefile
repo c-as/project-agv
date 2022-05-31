@@ -33,7 +33,7 @@ $(BUILD_DIR)/%.o: %.c
 	mkdir -p $(@D)
 	$(COMPILE) $(FLAGS) -c $< -o $@
 
-compile: clean-all $(OBJS)
+compile: clean $(OBJS)
 	$(COMPILE) -o $(BUILD).elf $(OBJS)
 	avr-objcopy -j .text -j .data -O ihex $(BUILD).elf $(BUILD).hex
 	avr-size --format=avr --mcu=$(DEVICE) $(BUILD).elf
