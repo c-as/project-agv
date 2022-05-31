@@ -1,9 +1,11 @@
+#include "lib/motor-code/motorenDefines.h"
 #include "lib/pinio.h"
 #include "lib/serialio.h"
 #include "lib/tof/tof.h"
 
 void init()
 {
+    init_motoren();
     serialio_init();
     tof_init();
 }
