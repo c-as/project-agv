@@ -123,7 +123,6 @@ void ldr_vergelijken()
                 break;
             }
         }
-        break;
     }
 
 }
