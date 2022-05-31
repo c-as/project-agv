@@ -15,7 +15,6 @@ void init_motoren()
     DDR_RPWM4 |= (1 << PIN_RPWM4);
 }
 
-
 /*
 de motor is de motor die je wilt aansturen
 de kant is welke kant de motor op draait
@@ -32,15 +31,15 @@ void motor(int motor, int kant)
             PORT_LPWM1 &= ~(1 << PIN_LPWM1);
             PORT_RPWM1 |= (1 << PIN_RPWM1);
             break;
-        case 2: 
+        case 2:
             PORT_LPWM2 &= ~(1 << PIN_LPWM2);
             PORT_RPWM2 |= (1 << PIN_RPWM2);
             break;
-        case 3: 
+        case 3:
             PORT_LPWM3 &= ~(1 << PIN_LPWM3);
             PORT_RPWM3 |= (1 << PIN_RPWM3);
-            break;        
-        case 4: 
+            break;
+        case 4:
             PORT_LPWM4 &= ~(1 << PIN_LPWM4);
             PORT_RPWM4 |= (1 << PIN_RPWM4);
             break;
@@ -54,15 +53,15 @@ void motor(int motor, int kant)
             PORT_LPWM1 |= (1 << PIN_LPWM1);
             PORT_RPWM1 &= ~(1 << PIN_RPWM1);
             break;
-        case 2: 
+        case 2:
             PORT_LPWM2 |= (1 << PIN_LPWM2);
             PORT_RPWM2 &= ~(1 << PIN_RPWM2);
             break;
-        case 3: 
+        case 3:
             PORT_LPWM3 |= (1 << PIN_LPWM3);
             PORT_RPWM3 &= ~(1 << PIN_RPWM3);
-            break;        
-        case 4: 
+            break;
+        case 4:
             PORT_LPWM4 |= (1 << PIN_LPWM4);
             PORT_RPWM4 &= ~(1 << PIN_RPWM4);
             break;
