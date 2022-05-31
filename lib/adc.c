@@ -4,7 +4,7 @@
 #include <avr/io.h>
 #include "adc.h"
 
-#define DEFAULT_REF (0 << REFS1) | (1 << REFS0) // referentiespanning van avcc
+#define DEFAULT_REF (0 << REFS1) | (1 << REFS0) // referentiespanning is avcc (5v)
 
 void adc_init()
 {
