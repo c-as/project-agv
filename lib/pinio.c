@@ -22,7 +22,8 @@ void pin_set_mode(Pin pin, PinMode mode)
     }
 }
 
-void pin_set_output(Pin pin, bool output) // zet de pin hoog(1) of laag(0)
+// zet de pin hoog(1) of laag(0)
+void pin_set_output(Pin pin, bool output)
 {
     if (output)
         *pin.pPORT |= (1 << pin.pin);
@@ -30,7 +31,8 @@ void pin_set_output(Pin pin, bool output) // zet de pin hoog(1) of laag(0)
         *pin.pPORT &= ~(1 << pin.pin);
 }
 
-bool pin_get_input(Pin pin) // kijk of pin hoog(1) of laag(0) is
+// kijk of pin hoog(1) of laag(0) is
+bool pin_get_input(Pin pin)
 {
     if (*pin.pPORT & (1 << pin.pin))          // kijk of de interne pullup weerstand wordt gebruikt
         return !(*pin.pPIN & (1 << pin.pin)); // als dat zo is dan moet de waarde omgedraaid worden
@@ -38,7 +40,8 @@ bool pin_get_input(Pin pin) // kijk of pin hoog(1) of laag(0) is
         return *pin.pPIN & (1 << pin.pin);
 }
 
-void pinio_test() // knipper led op poort A12
+// knipper led op poort A12
+void pinio_test()
 {
     pin_set_mode(MEGA_PIN_A12, PINMODE_OUTPUT);
 

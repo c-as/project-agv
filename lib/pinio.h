@@ -145,14 +145,16 @@
 #define MEGA_PIN_A0 \
     (Pin) { .pDDR = &DDRF, .pPIN = &PINF, .pPORT = &PORTF, .pin = PF0 }
 
-typedef enum // opties voor de werking van elke pin
+// opties voor de werking van elke pin
+typedef enum
 {
     PINMODE_INPUT,
     PINMODE_INPUT_PULLUP,
     PINMODE_OUTPUT,
 } PinMode;
 
-typedef struct // pakket van data voor het gebruik van een specifieke pin
+// pakket van data voor het gebruik van een specifieke pin
+typedef struct
 {
     volatile uint8_t *pDDR;
     volatile uint8_t *pPIN;
