@@ -5,7 +5,7 @@
 #include <util/delay.h>
 
 // ADC Initialisatie
-void init_adc(void)
+void init_ldr(void)
 {
     ADMUX = (0 << REFS1) | (1 << REFS0);
     ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
