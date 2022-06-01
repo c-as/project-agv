@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 #include "../pinio.h"
-#include "VL53L0X.h"
-#include "i2cmaster.h"
-#include "millis.h"
+#include "vl53l0x-non-arduino/VL53L0X.h"
+#include "vl53l0x-non-arduino/util/i2cmaster.h"
+#include "vl53l0x-non-arduino/util/millis.h"
 
 #define TIMING_BUDGET_MS 50
 
