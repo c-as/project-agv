@@ -22,6 +22,11 @@ void ldr_vergelijken()
         if (adc_convert(PIN_LDR0) < adc_convert(PIN_LDR1))
         {
             // Rechtsom draaien
+            motor(1, 1);
+            motor(2, -1);
+            motor(3, 1);
+            motor(4, -1);
+
             printf("ldr: motors rechts\n");
 
             while (1)
@@ -30,6 +35,10 @@ void ldr_vergelijken()
                 if (abs(adc_convert(PIN_LDR0) - adc_convert(PIN_LDR1)) < MIN_VERSCHIL)
                 {
                     // motoren stoppen
+                    motor(1, 0);
+                    motor(2, 0);
+                    motor(3, 0);
+                    motor(4, 0);
                     printf("ldr: motors uit\n");
                     break;
                 }
@@ -39,7 +48,10 @@ void ldr_vergelijken()
         else
         {
             // Linksom draaien
-
+            motor(1, -1);
+            motor(2, 1);
+            motor(3, -1);
+            motor(4, 1);
             printf("ldr: motors links\n");
 
             while (1)
@@ -48,6 +60,10 @@ void ldr_vergelijken()
                 if (abs(adc_convert(PIN_LDR0) - adc_convert(PIN_LDR1)) < MIN_VERSCHIL) /// waarden geven wss niet precies dezelfde waarde, dus ff nog oplossing
                 {
                     // motoren stoppen
+                    motor(1, 0);
+                    motor(2, 0);
+                    motor(3, 0);
+                    motor(4, 0);
                     printf("ldr: motors uit\n");
                     break;
                 }
@@ -76,6 +92,10 @@ void ldr_volgen()
             else
             {
                 // Motoren uit
+                motor(1, 0);
+                motor(2, 0);
+                motor(3, 0);
+                motor(4, 0);
                 printf("ldr: motors uit\n");
             }
         }

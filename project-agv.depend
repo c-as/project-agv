@@ -84,3 +84,9 @@
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.h
 
+1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\adc.c
+	<stdio.h>
+	<util/delay.h>
+	<avr/io.h>
+	"adc.h"
+
