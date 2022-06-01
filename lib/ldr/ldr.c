@@ -152,6 +152,7 @@ void ldr_volgen()
             // ToF 1 en 2 > 20
             if (1)
             {
+                printf("ldr: vergelijken\n");
                 while (1)
                 {
                     ldr_vergelijken();
@@ -161,7 +162,11 @@ void ldr_volgen()
             else
             {
                 // Motoren uit
+                printf("ldr: motors uit\n");
             }
         }
+        printf("get_light0: %i\n", adc_convert(MEGA_PIN_A0_ANALOG));
+        printf("get_light1: %i\n", adc_convert(MEGA_PIN_A1_ANALOG));
+        _delay_ms(100);
     }
 }
