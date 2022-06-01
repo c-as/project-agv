@@ -3,6 +3,10 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdlib.h>
+#include "ldr.h"
+#include "../adc.h"
+
 #define MIN_VERSCHIL 30
 #define MIN_LICHT 80
 
@@ -96,33 +100,42 @@ int get_light(int LDR) // choose which ldr to read
 
 void ldr_vergelijken()
 {
-    // LDR 1 < 2
-    if(get_light(0) < get_light(1))
+    // verschil bestaat
+    if (abs(get_light(0) - get_light(1)) > MIN_VERSCHIL)
     {
-        // Rechtsom draaien
-
-        while(1)
+        // LDR 1 < 2
+        if (get_light(0) < get_light(1))
         {
-            // LDR 1 == 2
-            if(get_light(0) == get_light(1))
+            // Rechtsom draaien
+            printf("ldr: motors rechts\n");
+
+            while (1)
             {
-                // motoren stoppen
-                break;
+                // LDR 1 == 2
+                if (abs(get_light(0) - get_light(1)) < MIN_VERSCHIL)
+                {
+                    // motoren stoppen
+                    printf("ldr: motors uit\n");
+                    break;
+                }
             }
         }
-    }
-    // LDR 1 > 2
-    else if(get_light(0) > get_light(1))
-    {
-        // Linksom draaien
-
-        while(1)
+        // LDR 1 > 2
+        else
         {
-            // LDR 1 == 2
-            if(get_light(0) == get_light(1))    /// waarden geven wss niet precies dezelfde waarde, dus ff nog oplossing
+            // Linksom draaien
+
+            printf("ldr: motors links\n");
+
+            while (1)
             {
-                // motoren stoppen
-                break;
+                // LDR 1 == 2
+                if (abs(get_light(0) - get_light(1)) < MIN_VERSCHIL) /// waarden geven wss niet precies dezelfde waarde, dus ff nog oplossing
+                {
+                    // motoren stoppen
+                    printf("ldr: motors uit\n");
+                    break;
+                }
             }
         }
     }
@@ -134,7 +147,7 @@ void ldr_volgen()
     while (1)
     {
         // LDR > 100
-        if(1)
+        if (get_light(0) < MIN_LICHT || get_light(1) < MIN_LICHT)
         {
             // ToF 1 en 2 > 20
             if (1)
