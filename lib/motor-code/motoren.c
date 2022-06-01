@@ -2,129 +2,127 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "motoren.h"
+#include "../pinio.h"
+
+#define PIN_IN1_MOTOR1 MEGA_PIN_D8_DIGITAL
+#define PIN_IN2_MOTOR1 MEGA_PIN_D9_DIGITAL
+#define PIN_IN1_MOTOR2 MEGA_PIN_D6_DIGITAL
+#define PIN_IN2_MOTOR2 MEGA_PIN_D7_DIGITAL
+#define PIN_IN1_MOTOR3 MEGA_PIN_D4_DIGITAL
+#define PIN_IN2_MOTOR3 MEGA_PIN_D5_DIGITAL
+#define PIN_IN1_MOTOR4 MEGA_PIN_D2_DIGITAL
+#define PIN_IN2_MOTOR4 MEGA_PIN_D3_DIGITAL
 
 void init_motoren()
 {
-    DDR_LPWM1 |= (1 << PIN_LPWM1);
-    DDR_LPWM2 |= (1 << PIN_LPWM2);
-    DDR_LPWM3 |= (1 << PIN_LPWM3);
-    DDR_LPWM4 |= (1 << PIN_LPWM4);
-    DDR_RPWM1 |= (1 << PIN_RPWM1);
-    DDR_RPWM2 |= (1 << PIN_RPWM2);
-    DDR_RPWM3 |= (1 << PIN_RPWM3);
-    DDR_RPWM4 |= (1 << PIN_RPWM4);
+    pin_set_mode(PIN_IN1_MOTOR1, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN2_MOTOR1, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN1_MOTOR2, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN2_MOTOR2, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN1_MOTOR3, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN2_MOTOR3, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN1_MOTOR4, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(PIN_IN2_MOTOR4, PINMODE_DIGITAL_OUTPUT);
 }
 
-/*
-de motor is de motor die je wilt aansturen
-de kant is welke kant de motor op draait
-1 = met de klok mee(CW)
--1 = tegen de klok in(CCW)
-*/
-void motor(int motor, int kant)
+void motor(int motor, MotorRichting kant)
 {
-    if (kant == 1)
+    if (kant == MOTORRICHTING_CW)
     {
         switch (motor)
         {
         case 1:
-            PORT_LPWM1 &= ~(1 << PIN_LPWM1);
-            PORT_RPWM1 |= (1 << PIN_RPWM1);
+            pin_set_output(PIN_IN1_MOTOR1, 0);
+            pin_set_output(PIN_IN2_MOTOR1, 1);
             break;
         case 2:
-            PORT_LPWM2 &= ~(1 << PIN_LPWM2);
-            PORT_RPWM2 |= (1 << PIN_RPWM2);
+            pin_set_output(PIN_IN1_MOTOR2, 0);
+            pin_set_output(PIN_IN2_MOTOR2, 1);
             break;
         case 3:
-            PORT_LPWM3 &= ~(1 << PIN_LPWM3);
-            PORT_RPWM3 |= (1 << PIN_RPWM3);
+            pin_set_output(PIN_IN1_MOTOR3, 0);
+            pin_set_output(PIN_IN2_MOTOR3, 1);
             break;
         case 4:
-            PORT_LPWM4 &= ~(1 << PIN_LPWM4);
-            PORT_RPWM4 |= (1 << PIN_RPWM4);
+            pin_set_output(PIN_IN1_MOTOR4, 0);
+            pin_set_output(PIN_IN2_MOTOR4, 1);
             break;
         }
     }
-    else if (kant == -1)
+    else if (kant == MOTORRICHTING_CCW)
     {
         switch (motor)
         {
         case 1:
-            PORT_LPWM1 |= (1 << PIN_LPWM1);
-            PORT_RPWM1 &= ~(1 << PIN_RPWM1);
+            pin_set_output(PIN_IN1_MOTOR1, 1);
+            pin_set_output(PIN_IN2_MOTOR1, 0);
             break;
         case 2:
-            PORT_LPWM2 |= (1 << PIN_LPWM2);
-            PORT_RPWM2 &= ~(1 << PIN_RPWM2);
+            pin_set_output(PIN_IN1_MOTOR2, 1);
+            pin_set_output(PIN_IN2_MOTOR2, 0);
             break;
         case 3:
-            PORT_LPWM3 |= (1 << PIN_LPWM3);
-            PORT_RPWM3 &= ~(1 << PIN_RPWM3);
+            pin_set_output(PIN_IN1_MOTOR3, 1);
+            pin_set_output(PIN_IN2_MOTOR3, 0);
             break;
         case 4:
-            PORT_LPWM4 |= (1 << PIN_LPWM4);
-            PORT_RPWM4 &= ~(1 << PIN_RPWM4);
+            pin_set_output(PIN_IN1_MOTOR4, 1);
+            pin_set_output(PIN_IN2_MOTOR4, 0);
             break;
         }
     }
 }
 
-// 1 is vooruit(postitief langs de x-as)
-//-1 is achteruit(negatief langs de x-as)
-void RijdenX_as(int kant)
+void RijdenX_as(RijRichting kant)
 {
-    if (kant == 1)
+    if (kant == RIJRICHTING_VOORUIT)
     {
-        motor(1, -1);
-        motor(2, 1);
-        motor(3, -1);
-        motor(4, 1);
+        motor(1, MOTORRICHTING_CW);
+        motor(2, MOTORRICHTING_CW);
+        motor(3, MOTORRICHTING_CW);
+        motor(4, MOTORRICHTING_CW);
     }
-    if (kant == -1)
+    if (kant == RIJRICHTING_ACHTERUIT)
     {
-        motor(1, 1);
-        motor(2, -1);
-        motor(3, 1);
-        motor(4, -1);
+        motor(1, MOTORRICHTING_CCW);
+        motor(2, MOTORRICHTING_CCW);
+        motor(3, MOTORRICHTING_CCW);
+        motor(4, MOTORRICHTING_CCW);
     }
 }
 
-// 1 is vooruit(postitief langs de y-as)
-//-1 is achteruit(negatief langs de y-as)
-void RijdenY_as(int kant)
+void RijdenY_as(RijRichting kant)
 {
-    if (kant == 1)
+    if (kant == RIJRICHTING_VOORUIT)
     {
-        motor(1, -1);
-        motor(2, -1);
-        motor(3, 1);
-        motor(4, 1);
+        motor(1, MOTORRICHTING_CW);
+        motor(2, MOTORRICHTING_CCW);
+        motor(3, MOTORRICHTING_CCW);
+        motor(4, MOTORRICHTING_CW);
     }
-    if (kant == -1)
+    if (kant == RIJRICHTING_ACHTERUIT)
     {
-        motor(1, 1);
-        motor(2, 1);
-        motor(3, -1);
-        motor(4, -1);
+        motor(1, MOTORRICHTING_CCW);
+        motor(2, MOTORRICHTING_CW);
+        motor(3, MOTORRICHTING_CW);
+        motor(4, MOTORRICHTING_CCW);
     }
 }
 
-// 1 is met de klok mee(CW)
-//-1 is tegen de klok in(CCW)
-void Draaien(int kant)
+void Draaien(RijRichting kant)
 {
-    if (kant == 1)
+    if (kant == RIJRICHTING_CW)
     {
-        motor(1, -1);
-        motor(2, -1);
-        motor(3, -1);
-        motor(4, -1);
+        motor(1, MOTORRICHTING_CCW);
+        motor(2, MOTORRICHTING_CCW);
+        motor(3, MOTORRICHTING_CCW);
+        motor(4, MOTORRICHTING_CCW);
     }
-    if (kant == -1)
+    if (kant == RIJRICHTING_CCW)
     {
-        motor(1, 1);
-        motor(2, 1);
-        motor(3, 1);
-        motor(4, 1);
+        motor(1, MOTORRICHTING_CW);
+        motor(2, MOTORRICHTING_CW);
+        motor(3, MOTORRICHTING_CW);
+        motor(4, MOTORRICHTING_CW);
     }
 }
