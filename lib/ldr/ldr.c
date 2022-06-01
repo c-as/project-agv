@@ -3,6 +3,8 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#define MIN_VERSCHIL 30
+#define MIN_LICHT 80
 
 // ADC Initialisatie
 void init_ldr(void)
