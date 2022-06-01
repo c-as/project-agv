@@ -1,0 +1,86 @@
+# depslib dependency file v1.0
+1654076241 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr\ldr.c
+	<avr/io.h>
+	<util/delay.h>
+	<stdlib.h>
+	"ldr.h"
+	"../adc.h"
+
+1654076241 c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr\ldr.h
+
+1654028219 c:\users\etien\onedrive\documenten\github\project-agv\lib\adc.h
+
+1654002033 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\motor-code\motoren.c
+	<avr/io.h>
+	<util/delay.h>
+	<avr/interrupt.h>
+	"motoren.h"
+
+1654076241 c:\users\etien\onedrive\documenten\github\project-agv\lib\motor-code\motoren.h
+
+1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.c
+	<avr/io.h>
+	<stdbool.h>
+	<util/delay.h>
+	"pinio.h"
+
+1654028219 c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.h
+	<inttypes.h>
+	<stdbool.h>
+
+1654005490 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\rand-volgen\rand-volgen.c
+	<avr/io.h>
+	"defines.h"
+
+1653924245 c:\users\etien\onedrive\documenten\github\project-agv\lib\rand-volgen\defines.h
+
+1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\serialio.c
+	<avr/io.h>
+	<stdio.h>
+	<util/setbaud.h>
+	<util/delay.h>
+
+1654002033 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\i2cmaster.c
+	<stdio.h>
+	<inttypes.h>
+	<compat/twi.h>
+	"i2cmaster.h"
+
+1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\i2cmaster.h
+	<avr/io.h>
+
+1654002033 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\millis.c
+	<avr/interrupt.h>
+	"millis.h"
+
+1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\millis.h
+
+1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.c
+	<stdio.h>
+	<avr/interrupt.h>
+	"../pinio.h"
+	"VL53L0X.h"
+	"i2cmaster.h"
+	"millis.h"
+
+1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x.h
+
+1654002033 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x.c
+	<stdint.h>
+	"i2cmaster.h"
+	"millis.h"
+	"VL53L0X.h"
+
+1654076241 source:c:\users\etien\onedrive\documenten\github\project-agv\main.c
+	"lib/motor-code/motoren.h"
+	"lib/pinio.h"
+	"lib/serialio.h"
+	"lib/tof/tof.h"
+	"lib/adc.h"
+	"lib/ldr/ldr.h"
+
+1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\serialio.h
+	<stdio.h>
+
+1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.h
+
