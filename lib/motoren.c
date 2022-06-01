@@ -2,7 +2,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "motoren.h"
-#include "../pinio.h"
+#include "pinio.h"
 
 #define PIN_IN1_MOTOR1 MEGA_PIN_D8_DIGITAL
 #define PIN_IN2_MOTOR1 MEGA_PIN_D9_DIGITAL

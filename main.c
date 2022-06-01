@@ -1,5 +1,5 @@
 #include "lib/serialio.h"
-#include "lib/motor-code/motoren.h"
+#include "lib/motoren.h"
 #include "lib/tof/tof.h"
 #include "lib/adc.h"
 #include "lib/ldr/ldr.h"
