@@ -16,8 +16,8 @@ typedef enum
 
 void i2c_init()
 {
-    TWSR = 0;
-    TWBR = ((F_CPU / SCL_CLOCK) - 16) / 2;
+    TWSR = 0;                              // geen prescaler
+    TWBR = ((F_CPU / SCL_CLOCK) - 16) / 2; // de formule is: SCL_CLOCK = CPU_CLOCK/(16+2(TWBR)*4^TWPS)
 }
 
 void i2c_wait_twint()
