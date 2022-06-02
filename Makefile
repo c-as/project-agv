@@ -43,7 +43,7 @@ compile: clean $(OBJS)
 asm: clean-all $(ASMS)
 
 upload:
-	assets\avrdude-v7.0-windows-windows-x86\avrdude.exe -v -D -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -U flash:w:$(BUILD).hex:i
+	assets\avrdude-v7.0-windows-windows-x86\avrdude.exe -v -V -D -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -U flash:w:$(BUILD).hex:i
 
 monitor:
 	assets\arduino-cli\bin\arduino-cli.exe monitor -p $(PORT)
