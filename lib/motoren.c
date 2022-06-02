@@ -126,3 +126,21 @@ void Draaien(RijRichting kant)
         motor(4, MOTORRICHTING_CW);
     }
 }
+
+void motoren_test(){
+    while (1)
+    {
+        Draaien(RIJRICHTING_CW);
+        _delay_ms(500);
+        Draaien(RIJRICHTING_CCW);
+        _delay_ms(500);
+        RijdenX_as(RIJRICHTING_VOORUIT);
+        _delay_ms(500);
+        RijdenX_as(RIJRICHTING_ACHTERUIT);
+        _delay_ms(500);
+        RijdenY_as(RIJRICHTING_VOORUIT);
+        _delay_ms(500);
+        RijdenY_as(RIJRICHTING_ACHTERUIT);
+        _delay_ms(500);
+    }
+}
