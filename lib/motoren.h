@@ -21,5 +21,6 @@ void motor(int motor, MotorRichting kant);
 void RijdenX_as(RijRichting kant);
 void RijdenY_as(RijRichting kant);
 void Draaien(RijRichting kant);
+void motoren_test();
 
 #endif
