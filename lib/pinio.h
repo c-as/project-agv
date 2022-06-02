@@ -162,9 +162,19 @@ typedef struct
     volatile uint8_t pin;
 } DigitalPin;
 
+typedef enum
+{
+    PWMGROUP_A,
+    PWMGROUP_B,
+} PwmGroup;
+
+void pinio_init();
 void pin_set_mode(DigitalPin pin, DigitalPinMode mode);
 void pin_set_output(DigitalPin pin, bool output);
+void group_set_pwm(PwmGroup group, uint8_t duty);
+void pin_set_pwm(DigitalPin pin, uint8_t i, PwmGroup group, uint8_t duty);
 bool pin_get_input(DigitalPin pin);
-void pinio_test();
+void pinio_test_digital();
+void pinio_test_pwm();
 
 #endif
