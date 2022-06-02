@@ -27,18 +27,19 @@ void i2c_wait_twint()
     }
 }
 
-void i2c_send_start_condition()
+int i2c_send_start_condition()
 {
     TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
     i2c_wait_twint();
     if ((TWSR & 0xF8) != STATUS_START_TRANSMITTED) // Check value of TWI Status Register. Mask prescaler bits. If status different from START go to ERROR
     {
         printf("i2c error: start not transmitted\n");
-        return;
+        return 1;
     }
+    return 0;
 }
 
-void i2c_send_operation(uint8_t address, I2COperation operation)
+int i2c_send_operation(uint8_t address, I2COperation operation)
 {
     TWDR = address;
     if (operation == OPERATION_WRITE)
@@ -48,13 +49,15 @@ void i2c_send_operation(uint8_t address, I2COperation operation)
     else if (operation == OPERATION_READ)
     {
         printf("i2c error: operation read not implemented\n");
+        return 1;
     }
     i2c_wait_twint();
     if ((TWSR & 0xF8) != STATUS_SLA_W_TRANSMITTED_ACK) // Check value of TWI Status Register. Mask prescaler bits. If status different from MT_SLA_ACK go to ERRO
     {
         printf("i2c error: start not transmitted\n");
-        return;
+        return 1;
     }
+    return 0;
 }
 
 void i2c_send_data(uint8_t data)
