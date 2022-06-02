@@ -23,7 +23,7 @@
  @param  void
  @return none
  */
-extern void i2c_init(void);
+extern void i2cmaster_init(void);
 
 
 /** 

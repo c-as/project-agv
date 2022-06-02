@@ -12,7 +12,7 @@ void tof_init()
     pin_set_mode(MEGA_PIN_D20_DIGITAL, PINMODE_DIGITAL_INPUT_PULLUP);
     pin_set_mode(MEGA_PIN_D22_DIGITAL, PINMODE_DIGITAL_INPUT_PULLUP);
 
-    i2c_init();
+    i2cmaster_init();
     initMillis();
     sei();
 
