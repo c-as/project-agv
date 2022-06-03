@@ -58,7 +58,7 @@ int i2c_send_operation(uint8_t address, I2COperation operation)
     i2c_wait_twint();
     if ((TWSR & 0xF8) != STATUS_SLA_W_TRANSMITTED_ACK) // Check value of TWI Status Register. Mask prescaler bits. If status different from MT_SLA_ACK go to ERRO
     {
-        printf("i2c error: start not transmitted\n");
+        printf("i2c error: operation not transmitted\n");
         return 1;
     }
     return 0;
