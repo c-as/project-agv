@@ -1,6 +1,10 @@
 #include <compat/twi.h>
 #include <stdio.h>
 
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
 #define SCL_CLOCK 400000
 #define STATUS_START_TRANSMITTED 0x08
 #define STATUS_SLA_W_TRANSMITTED 0x20
