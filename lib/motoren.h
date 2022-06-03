@@ -5,7 +5,13 @@
 typedef enum
 {
     RIJRICHTING_VOORUIT,
+    RIJRICHTING_X_PLUS,
     RIJRICHTING_ACHTERUIT,
+    RIJRICHTING_X_MIN,
+    RIJRICHTING_LINKS,
+    RIJRICHTING_Y_PLUS,
+    RIJRICHTING_RECHTS,
+    RIJRICHTING_Y_MIN,
     RIJRICHTING_CW,
     RIJRICHTING_CCW,
 } RijRichting;
@@ -18,9 +24,7 @@ typedef enum
 
 void init_motoren(void);
 void motor(int motor, MotorRichting kant);
-void RijdenX_as(RijRichting kant);
-void RijdenY_as(RijRichting kant);
-void Draaien(RijRichting kant);
+void rijden(RijRichting kant);
 void motoren_test();
 
 #endif

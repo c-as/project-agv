@@ -73,52 +73,44 @@ void motor(int motor, MotorRichting kant)
     }
 }
 
-void RijdenX_as(RijRichting kant)
+void rijden(RijRichting kant)
 {
-    if (kant == RIJRICHTING_VOORUIT)
+    if (kant == RIJRICHTING_VOORUIT || kant == RIJRICHTING_X_PLUS)
     {
         motor(1, MOTORRICHTING_CCW);
         motor(2, MOTORRICHTING_CW);
         motor(3, MOTORRICHTING_CCW);
         motor(4, MOTORRICHTING_CW);
     }
-    if (kant == RIJRICHTING_ACHTERUIT)
+    else if (kant == RIJRICHTING_ACHTERUIT || kant == RIJRICHTING_X_MIN)
     {
         motor(1, MOTORRICHTING_CW);
         motor(2, MOTORRICHTING_CCW);
         motor(3, MOTORRICHTING_CW);
         motor(4, MOTORRICHTING_CCW);
     }
-}
-
-void RijdenY_as(RijRichting kant)
-{
-    if (kant == RIJRICHTING_VOORUIT)
+    else if (kant == RIJRICHTING_LINKS || kant == RIJRICHTING_Y_PLUS)
     {
         motor(1, MOTORRICHTING_CW);
         motor(2, MOTORRICHTING_CW);
         motor(3, MOTORRICHTING_CCW);
         motor(4, MOTORRICHTING_CCW);
     }
-    if (kant == RIJRICHTING_ACHTERUIT)
+    else if (kant == RIJRICHTING_RECHTS || kant == RIJRICHTING_Y_MIN)
     {
         motor(1, MOTORRICHTING_CCW);
         motor(2, MOTORRICHTING_CCW);
         motor(3, MOTORRICHTING_CW);
         motor(4, MOTORRICHTING_CW);
     }
-}
-
-void Draaien(RijRichting kant)
-{
-    if (kant == RIJRICHTING_CW)
+    else if (kant == RIJRICHTING_CW)
     {
         motor(1, MOTORRICHTING_CCW);
         motor(2, MOTORRICHTING_CCW);
         motor(3, MOTORRICHTING_CCW);
         motor(4, MOTORRICHTING_CCW);
     }
-    if (kant == RIJRICHTING_CCW)
+    else if (kant == RIJRICHTING_CCW)
     {
         motor(1, MOTORRICHTING_CW);
         motor(2, MOTORRICHTING_CW);
@@ -127,20 +119,21 @@ void Draaien(RijRichting kant)
     }
 }
 
-void motoren_test(){
+void motoren_test()
+{
     while (1)
     {
-        Draaien(RIJRICHTING_CW);
+        rijden(RIJRICHTING_CW);
         _delay_ms(500);
-        Draaien(RIJRICHTING_CCW);
+        rijden(RIJRICHTING_CCW);
         _delay_ms(500);
-        RijdenX_as(RIJRICHTING_VOORUIT);
+        rijden(RIJRICHTING_VOORUIT);
         _delay_ms(500);
-        RijdenX_as(RIJRICHTING_ACHTERUIT);
+        rijden(RIJRICHTING_ACHTERUIT);
         _delay_ms(500);
-        RijdenY_as(RIJRICHTING_VOORUIT);
+        rijden(RIJRICHTING_LINKS);
         _delay_ms(500);
-        RijdenY_as(RIJRICHTING_ACHTERUIT);
+        rijden(RIJRICHTING_RECHTS);
         _delay_ms(500);
     }
 }
