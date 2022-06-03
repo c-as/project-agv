@@ -4,7 +4,7 @@
 #include <avr/io.h>
 #include "rand-volgen.h"
 #include "tof/tof.h"
-#include <math.h>
+#include <stdlib.h>
 #include "motoren.h"
 
 // afstanden in mm
