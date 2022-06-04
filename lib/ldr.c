@@ -5,8 +5,8 @@
 #include <util/delay.h>
 #include <stdlib.h>
 #include "ldr.h"
-#include "../adc.h"
-#include "../motoren.h"
+#include "adc.h"
+#include "motoren.h"
 
 #define MIN_VERSCHIL 30
 #define MIN_LICHT 80

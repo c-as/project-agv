@@ -2,7 +2,7 @@
 #include "lib/motoren.h"
 #include "lib/tof/tof.h"
 #include "lib/adc.h"
-#include "lib/ldr/ldr.h"
+#include "lib/ldr.h"
 
 void init()
 {
