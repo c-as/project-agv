@@ -105,12 +105,6 @@ int vec_delete(Vec *vec, int i)
     {
         void *item = vec_get(vec, x + 1);
 
-        if (!item)
-        {
-            printf("vec error: vec_delete(): could not reorder vec (get)\n");
-            return 1;
-        }
-
         if (vec_set(vec, x, item))
         {
             printf("vec error: vec_delete(): could not reorder vec (set)\n");
