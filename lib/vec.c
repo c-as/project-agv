@@ -84,6 +84,28 @@ int vec_append(Vec *vec, void *item)
     return 0;
 }
 
+int vec_insert(Vec *vec, int i, void *item)
+{
+    for (int x = vec->length; x > i; x--)
+    {
+        void *item = vec_get(vec, x - 1);
+
+        if (vec_set(vec, x, item))
+        {
+            printf("vec error: vec_insert(): could not reorder vec (set)\n");
+            return 1;
+        }
+    }
+
+    if (vec_set(vec, i, item))
+    {
+        printf("vec error: vec_insert(): could not insert item\n");
+        return 1;
+    }
+
+    return 0;
+}
+
 void *vec_get(Vec *vec, int i)
 {
     if (vec)
@@ -142,4 +164,8 @@ void vec_test()
     printf("%s\n", (char *)vec_get(vec, 1));
     vec_set(vec, 20, "eee");
     printf("%s\n", (char *)vec_get(vec, 20));
+    vec_insert(vec, 1, "ccc");
+    printf("%s\n", (char *)vec_get(vec, 0));
+    printf("%s\n", (char *)vec_get(vec, 1));
+    printf("%s\n", (char *)vec_get(vec, 2));
 }
