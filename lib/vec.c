@@ -101,7 +101,7 @@ void *vec_get(Vec *vec, int i)
 
 int vec_delete(Vec *vec, int i)
 {
-    for (size_t x = i; x < vec->length - 1; x++)
+    for (int x = i; x < vec->length - 1; x++)
     {
         void *item = vec_get(vec, x + 1);
 
