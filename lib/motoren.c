@@ -71,6 +71,28 @@ void motor(int motor, MotorRichting kant)
             break;
         }
     }
+    else if (kant == MOTORRICHTING_STOP)
+    {
+        switch (motor)
+        {
+        case 1:
+            pin_set_output(PIN_IN1_MOTOR1, 0);
+            pin_set_output(PIN_IN2_MOTOR1, 0);
+            break;
+        case 2:
+            pin_set_output(PIN_IN1_MOTOR2, 0);
+            pin_set_output(PIN_IN2_MOTOR2, 0);
+            break;
+        case 3:
+            pin_set_output(PIN_IN1_MOTOR3, 0);
+            pin_set_output(PIN_IN2_MOTOR3, 0);
+            break;
+        case 4:
+            pin_set_output(PIN_IN1_MOTOR4, 0);
+            pin_set_output(PIN_IN2_MOTOR4, 0);
+            break;
+        }
+    }
 }
 
 void rijden(RijRichting kant)
@@ -116,6 +138,13 @@ void rijden(RijRichting kant)
         motor(2, MOTORRICHTING_CW);
         motor(3, MOTORRICHTING_CW);
         motor(4, MOTORRICHTING_CW);
+    }
+    else if (kant == RIJRICHTING_STOP)
+    {
+        motor(1, MOTORRICHTING_STOP);
+        motor(2, MOTORRICHTING_STOP);
+        motor(3, MOTORRICHTING_STOP);
+        motor(4, MOTORRICHTING_STOP);
     }
 }
 

@@ -14,12 +14,14 @@ typedef enum
     RIJRICHTING_Y_MIN,
     RIJRICHTING_CW,
     RIJRICHTING_CCW,
+    RIJRICHTING_STOP,
 } RijRichting;
 
 typedef enum
 {
     MOTORRICHTING_CW,
     MOTORRICHTING_CCW,
+    MOTORRICHTING_STOP,
 } MotorRichting;
 
 void init_motoren(void);
