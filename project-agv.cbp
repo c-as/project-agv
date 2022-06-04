@@ -54,10 +54,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/adc.h" />
-		<Unit filename="lib/ldr/ldr.c">
+		<Unit filename="lib/ldr.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib/ldr/ldr.h" />
+		<Unit filename="lib/ldr.h" />
 		<Unit filename="lib/motor-code/motoren.c">
 			<Option compilerVar="CC" />
 		</Unit>
