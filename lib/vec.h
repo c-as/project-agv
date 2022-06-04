@@ -3,9 +3,9 @@
 
 typedef struct
 {
-    void **items;
-    int capacity;
-    int length;
+    volatile void **items;
+    volatile int capacity;
+    volatile int length;
 } Vec;
 
 Vec *vec_new(int capacity);
