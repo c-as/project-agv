@@ -18,10 +18,21 @@ void pwm_init()
 
 ISR(TIMER2_OVF_vect)
 {
-    for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+    if (OCR2A > 0)
     {
-        pin_set_output(pwm_pinsa[i], 1);
-        pin_set_output(pwm_pinsb[i], 1);
+        for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+        {
+            pin_set_output(pwm_pinsa[i], 1);
+        }
+    }
+
+    if (OCR2A > 0)
+    {
+        for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+        {
+
+            pin_set_output(pwm_pinsb[i], 1);
+        }
     }
 }
 
