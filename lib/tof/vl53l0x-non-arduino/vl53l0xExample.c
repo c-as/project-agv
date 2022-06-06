@@ -5,7 +5,7 @@
  *      Author: michael
  *
  *  Demonstrate the VL53I0X distance sensor.
- * 
+ *
  */
 #include <stdint.h>
 #include <avr/io.h>
@@ -51,7 +51,7 @@
 // 	// setVcselPulsePeriod(VcselPeriodFinalRange, 14);
 // 	setMeasurementTimingBudget( 500 * 1000UL );		// integrate over 500 ms per measurement
 
-// 	// Main loop	
+// 	// Main loop
 // 	while(1){
 // 		readRangeSingleMillimeters( &xTraStats );	// blocks until measurement is finished
 // 	  	debug_str(   "\n\nstatus  = ");
