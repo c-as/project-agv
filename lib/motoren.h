@@ -14,19 +14,18 @@ typedef enum
     RIJRICHTING_Y_MIN,
     RIJRICHTING_CW,
     RIJRICHTING_CCW,
-    RIJRICHTING_STOP,
 } RijRichting;
 
 typedef enum
 {
     MOTORRICHTING_CW,
     MOTORRICHTING_CCW,
-    MOTORRICHTING_STOP,
 } MotorRichting;
 
-void init_motoren(void);
-void motor(int motor, MotorRichting kant);
-void rijden(RijRichting kant);
+void init_motoren();
+void motor_zet_richting(int motor, MotorRichting kant);
+void motor_zet_duty(uint8_t duty);
+void rijden(RijRichting kant, uint8_t duty);
 void motoren_test();
 
 #endif
