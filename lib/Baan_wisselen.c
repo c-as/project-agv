@@ -9,7 +9,7 @@
 // Tof moet er nog bij
 
 /// Hier zo'n typedef enum van maken
-get_afstandXYZ(int tof, Afstanden_XYZ welke)
+void get_afstandXYZ(int tof, Afstanden_XYZ welke)
 {
     if(welke == AFSTAND_X)
     {
