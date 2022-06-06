@@ -83,13 +83,6 @@ void pwm_pin_set_group(DigitalPin pin, uint8_t i, PwmGroup group)
     }
 }
 
-// zet een pin in de lijst van van een groep pwm pins op plek i met een duty cycle (van de groep)
-void pwm_pin_set(DigitalPin pin, uint8_t i, PwmGroup group, uint8_t duty)
-{
-    pwm_pin_set_group(pin, i, group);
-    pwm_group_set_duty(group, duty);
-}
-
 // golf led op poort D39 en D41
 void pwm_test()
 {
