@@ -55,6 +55,7 @@ ISR(TIMER2_COMPB_vect)
 // zet de duty cycle van een pwm pins groep
 void pwm_group_set_duty(PwmGroup group, uint8_t duty)
 {
+    cli();
     if (group == PWMGROUP_A)
     {
         if (duty == 0 || duty == 255)
@@ -109,11 +110,13 @@ void pwm_group_set_duty(PwmGroup group, uint8_t duty)
         }
         OCR2B = duty;
     }
+    sei();
 }
 
 // zet een pin in een pwm pin groep op plaats i
 void pwm_pin_set_group(DigitalPin pin, uint8_t i, PwmGroup group)
 {
+    cli();
     if (group == PWMGROUP_A)
     {
         pwm_pinsa[i] = pin;
@@ -122,6 +125,7 @@ void pwm_pin_set_group(DigitalPin pin, uint8_t i, PwmGroup group)
     {
         pwm_pinsb[i] = pin;
     }
+    sei();
 }
 
 // golf led op poort D39 en D41
