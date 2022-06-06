@@ -3,17 +3,17 @@
 
 #include <inttypes.h>
 #include "pinio.h"
+#include "vec.h"
 
-typedef enum
+// pakket van data die een groep van pins met dezelfde duty cycle onthoud
+typedef struct
 {
-    PWMGROUP_A,
-    PWMGROUP_B,
+    volatile uint8_t duty;
+    volatile Vec *pins;
 } PwmGroup;
 
 void pwm_init();
-void pwm_group_set_duty(PwmGroup group, uint8_t duty);
-void pwm_pin_set_group(DigitalPin pin, uint8_t i, PwmGroup group);
-void pwm_pin_set(DigitalPin pin, uint8_t i, PwmGroup group, uint8_t duty);
+int pwm_pin_set(DigitalPin pin, uint8_t duty);
 void pwm_test();
 
 #endif

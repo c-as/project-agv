@@ -8,15 +8,14 @@ Vec *vec_new(int capacity)
 {
     if (!capacity)
         capacity = VEC_NEW_CAPACITY;
-    void **items = malloc(sizeof(void *) * capacity);
+    volatile void **items = malloc(sizeof(void *) * capacity);
     if (items)
     {
-        Vec vec = (Vec){.items = items, .capacity = VEC_NEW_CAPACITY, .length = 0};
-        Vec *pVec = malloc(sizeof(Vec));
-        if (pVec)
+        Vec *vec = malloc(sizeof(Vec));
+        if (vec)
         {
-            *pVec = vec;
-            return pVec;
+            *vec = (Vec){.items = items, .capacity = VEC_NEW_CAPACITY, .length = 0};
+            return vec;
         }
         printf("vec error: vec_new(): could not allocate vec\n");
         return 0;
@@ -28,19 +27,20 @@ Vec *vec_new(int capacity)
 
 int vec_resize(Vec *vec, int capacity)
 {
-    if (vec)
+    if (!vec)
     {
-        void **items = realloc(vec->items, sizeof(void *) * capacity);
-        if (items)
-        {
-            vec->items = items;
-            vec->capacity = capacity;
-            return 0;
-        }
-        printf("vec error: vec_resize(): could not resize items\n");
+        printf("vec error: vec_resize(): vec == 0\n");
         return 1;
     }
-    printf("vec error: vec_resize(): vec == 0\n");
+
+    volatile void **items = realloc(vec->items, sizeof(void *) * capacity);
+    if (items)
+    {
+        vec->items = items;
+        vec->capacity = capacity;
+        return 0;
+    }
+    printf("vec error: vec_resize(): could not resize items\n");
     return 1;
 }
 
@@ -76,6 +76,12 @@ int vec_set(Vec *vec, int i, void *item)
 
 int vec_append(Vec *vec, void *item)
 {
+    if (!vec)
+    {
+        printf("vec error: vec_append(): vec == 0\n");
+        return 1;
+    }
+
     if (vec_set(vec, vec->length, item))
     {
         printf("vec error: vec_append(): appending vec failed\n");
@@ -86,6 +92,12 @@ int vec_append(Vec *vec, void *item)
 
 int vec_insert(Vec *vec, int i, void *item)
 {
+    if (!vec)
+    {
+        printf("vec error: vec_insert(): vec == 0\n");
+        return 1;
+    }
+
     for (int x = vec->length; x > i; x--)
     {
         void *item = vec_get(vec, x - 1);
@@ -108,21 +120,37 @@ int vec_insert(Vec *vec, int i, void *item)
 
 void *vec_get(Vec *vec, int i)
 {
-    if (vec)
+    if (!vec)
     {
-        if (i >= 0 && i < vec->length)
-        {
-            return vec->items[i];
-        }
-        printf("vec error: vec_get(): i < 0 || i > vec->length\n");
-        return 0;
+        printf("vec error: vec_get(): vec == 0\n");
+        return (void *)0;
     }
-    printf("vec error: vec_get(): vec == 0\n");
+
+    if (i >= 0 && i < vec->length)
+    {
+        return vec->items[i];
+    }
+    printf("vec error: vec_get(): i < 0 || i > vec->length\n");
     return 0;
 }
 
 int vec_delete(Vec *vec, int i)
 {
+    if (!vec)
+    {
+        printf("vec error: vec_delete(): vec == 0\n");
+        return 1;
+    }
+
+    void *deleted = vec_get(vec, i);
+    if (!deleted)
+    {
+        printf("vec error: vec_delete(): could not get item\n");
+        return 1;
+    }
+
+    free(deleted);
+
     for (int x = i; x < vec->length - 1; x++)
     {
         void *item = vec_get(vec, x + 1);
@@ -142,13 +170,49 @@ int vec_delete(Vec *vec, int i)
 
     vec->length--;
 
+    if (vec->capacity - vec->length > 10)
+    {
+
+        if (vec_resize(vec, vec->capacity - 5))
+        {
+
+            printf("vec error: vec_delete(): could not resize vec\n");
+            return 1;
+        };
+    }
+
     return 0;
 }
 
-void vec_test()
+int vec_free(Vec *vec)
 {
-    Vec *vec = vec_new(0);
+    if (!vec)
+    {
+        printf("vec error: vec_free(): vec == 0\n");
+        return 1;
+    }
+
+    for (int i = 0; i < vec->length; i++)
+    {
+        void *item = vec_get(vec, i);
+        free(item);
+    }
+
+    free(vec->items);
+    free(vec);
+
+    return 0;
+}
+
+Vec *vec;
+void vec_test_new()
+{
+    vec = vec_new(0);
     printf("%i\n", vec->capacity);
+}
+
+void vec_test_append()
+{
     vec_append(vec, "aaa");
     vec_append(vec, "bbb");
     vec_append(vec, "ccc");
@@ -156,16 +220,57 @@ void vec_test()
     printf("%s\n", (char *)vec_get(vec, 0));
     printf("%s\n", (char *)vec_get(vec, 1));
     printf("%s\n", (char *)vec_get(vec, 2));
+}
+
+void vec_test_delete()
+{
     vec_delete(vec, 0);
     printf("%s\n", (char *)vec_get(vec, 0));
     printf("%s\n", (char *)vec_get(vec, 1));
+    printf("%i\n", vec->capacity);
+}
+
+void vec_test_set()
+{
     vec_set(vec, 1, "ddd");
     printf("%s\n", (char *)vec_get(vec, 0));
     printf("%s\n", (char *)vec_get(vec, 1));
+}
+
+void vec_test_set_resize()
+{
     vec_set(vec, 20, "eee");
     printf("%s\n", (char *)vec_get(vec, 20));
+    printf("%i\n", vec->capacity);
+    printf("%i\n", vec->length);
+}
+
+void vec_test_insert()
+{
     vec_insert(vec, 1, "ccc");
     printf("%s\n", (char *)vec_get(vec, 0));
     printf("%s\n", (char *)vec_get(vec, 1));
     printf("%s\n", (char *)vec_get(vec, 2));
+    printf("%i\n", vec->length);
+}
+
+void vec_test_delete_resize()
+{
+    for (int i = vec->length; i > 5; i--)
+    {
+        vec_delete(vec, i - 1);
+    }
+    printf("%i\n", vec->capacity);
+    printf("%i\n", vec->length);
+}
+
+void vec_test()
+{
+    vec_test_new();
+    vec_test_append();
+    vec_test_delete();
+    vec_test_set();
+    vec_test_set_resize();
+    vec_test_insert();
+    vec_test_delete_resize();
 }

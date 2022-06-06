@@ -15,6 +15,7 @@ int vec_append(Vec *vec, void *item);
 int vec_insert(Vec *vec, int i, void *item);
 void *vec_get(Vec *vec, int i);
 int vec_delete(Vec *vec, int i);
+int vec_free(Vec *vec);
 void vec_test();
 
 #endif
