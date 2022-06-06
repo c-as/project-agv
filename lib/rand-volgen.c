@@ -15,7 +15,7 @@ void RandVolgen()
 {
     while (1)
     {
-        int meting = tof_measure();
+        int meting = 0; // tof_measure();
         if (abs(RAND_AFSTAND - meting) > MIN_DIFF)
         {
             if (RAND_AFSTAND > meting)
