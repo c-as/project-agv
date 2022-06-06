@@ -3,7 +3,7 @@
 #include "pwm.h"
 #include <util/delay.h>
 
-#define AMOUNT_PWM_PINS 4
+#define AMOUNT_PWM_PINS 8
 
 DigitalPin pwm_pinsa[AMOUNT_PWM_PINS];
 DigitalPin pwm_pinsb[AMOUNT_PWM_PINS];
