@@ -57,27 +57,57 @@ void pwm_group_set_duty(PwmGroup group, uint8_t duty)
 {
     if (group == PWMGROUP_A)
     {
-        if (duty > 0)
+        if (duty == 0 || duty == 255)
         {
-            OCR2A = duty;
-            TIMSK2 |= (1 << OCIE2A);
+            TIMSK2 &= ~(1 << OCIE2A);
+
+            if (duty == 255)
+            {
+                for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+                {
+                    pin_set_output(pwm_pinsa[i], 1);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+                {
+                    pin_set_output(pwm_pinsa[i], 0);
+                }
+            }
         }
         else
         {
-            TIMSK2 &= ~(1 << OCIE2A);
+            TIMSK2 |= (1 << OCIE2A);
         }
+        OCR2A = duty;
     }
     else if (group == PWMGROUP_B)
     {
-        if (duty > 0)
+        if (duty == 0 || duty == 255)
         {
-            OCR2B = duty;
-            TIMSK2 |= (1 << OCIE2B);
+            TIMSK2 &= ~(1 << OCIE2B);
+
+            if (duty == 255)
+            {
+                for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+                {
+                    pin_set_output(pwm_pinsb[i], 1);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < AMOUNT_PWM_PINS; i++)
+                {
+                    pin_set_output(pwm_pinsb[i], 0);
+                }
+            }
         }
         else
         {
-            TIMSK2 &= ~(1 << OCIE2B);
+            TIMSK2 |= (1 << OCIE2B);
         }
+        OCR2B = duty;
     }
 }
 
