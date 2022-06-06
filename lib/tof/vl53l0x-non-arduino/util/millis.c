@@ -1,6 +1,10 @@
 #include <avr/interrupt.h>
 #include "millis.h"
 
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
 // Millisecond timer, inspired by the Arduino library
 // Uses Timer0 interrupts
 
