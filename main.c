@@ -7,22 +7,12 @@
 void init()
 {
     serialio_init();
-    adc_init();
-    init_motoren();
-    // tof_init();
+    tof_init();
 }
 
 void start()
 {
-    // pinio_test();
-    // serialio_test();
-    // tof_test();
-    // adc_test();
-    // ldr_volgen();
-    motor(1, MOTORRICHTING_CW);
-    motor(2, MOTORRICHTING_CW);
-    motor(3, MOTORRICHTING_CW);
-    motor(4, MOTORRICHTING_CW);
+    tof_test();
 }
 
 int main()
