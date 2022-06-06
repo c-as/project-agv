@@ -130,12 +130,15 @@ void pwm_test()
     pin_set_mode(MEGA_PIN_D39_DIGITAL, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(MEGA_PIN_D41_DIGITAL, PINMODE_DIGITAL_OUTPUT);
 
+    pwm_pin_set_group(MEGA_PIN_D39_DIGITAL, 0, PWMGROUP_A);
+    pwm_pin_set_group(MEGA_PIN_D41_DIGITAL, 0, PWMGROUP_B);
+
     int counta = 21;
     int countb = 21;
     while (1)
     {
-        pwm_pin_set(MEGA_PIN_D39_DIGITAL, 0, PWMGROUP_A, counta);
-        pwm_pin_set(MEGA_PIN_D41_DIGITAL, 0, PWMGROUP_B, countb);
+        pwm_group_set_duty(PWMGROUP_A, counta);
+        pwm_group_set_duty(PWMGROUP_B, countb);
         counta = (counta + 1) % 255;
         countb = (countb + 10) % 255;
         _delay_ms(10);
