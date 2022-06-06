@@ -38,6 +38,7 @@ void get_afstandXYZ(int tof, Afstanden_XYZ welke)
         {
         case 4:
             /// Afstand Y - X
+            break;
         }
     }
 }
