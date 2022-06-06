@@ -3,6 +3,9 @@
 #include "lib/tof/tof.h"
 #include "lib/adc.h"
 #include "lib/ldr.h"
+#include "lib/pinio.h"
+#include "lib/vec.h"
+#include "lib/pwm.h"
 
 void init()
 {
