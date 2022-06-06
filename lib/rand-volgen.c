@@ -20,16 +20,16 @@ void RandVolgen()
         {
             if (RAND_AFSTAND > meting)
             {
-                rijden(RIJRICHTING_LINKS);
+                rijden(RIJRICHTING_LINKS, UINT8_MAX);
             }
             else
             {
-                rijden(RIJRICHTING_RECHTS);
+                rijden(RIJRICHTING_RECHTS, UINT8_MAX);
             }
         }
         else
         {
-            rijden(RIJRICHTING_VOORUIT);
+            rijden(RIJRICHTING_VOORUIT, UINT8_MAX);
         }
     }
 }
