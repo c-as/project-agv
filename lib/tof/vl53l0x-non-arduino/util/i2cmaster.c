@@ -11,6 +11,9 @@
 #include "debugPrint.h"
 #include "i2cmaster.h"
 
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
 
 /*************************************************************************
  Initialization of the I2C bus interface. Need to be called only once
