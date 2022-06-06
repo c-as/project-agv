@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include "../pinio.h"
 #include "vl53l0x-non-arduino/VL53L0X.h"
 #include "vl53l0x-non-arduino/util/i2cmaster.h"
@@ -9,22 +10,25 @@
 
 void tof_init()
 {
-    pin_set_mode(MEGA_PIN_D20_DIGITAL, PINMODE_DIGITAL_INPUT_PULLUP);
-    pin_set_mode(MEGA_PIN_D22_DIGITAL, PINMODE_DIGITAL_INPUT_PULLUP);
-
     i2cmaster_init();
     initMillis();
     sei();
-
-    initVL53L0X(1);
-
-    setMeasurementTimingBudget(TIMING_BUDGET_MS * 1000UL);
 }
 
-uint16_t tof_measure()
+uint16_t tof_measure(DigitalPin tof_x_pin)
 {
+    // zet de pin laag
+    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
+
+    initVL53L0X(1);
+    setMeasurementTimingBudget(TIMING_BUDGET_MS * 1000UL);
+
     statInfo_t xTraStats;
     uint16_t measurement = readRangeSingleMillimeters(&xTraStats);
+
+    // zet de pin weer hoog
+    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_INPUT_PULLUP);
+
     return measurement / 2;
 }
 
@@ -32,7 +36,13 @@ void tof_test()
 {
     while (1)
     {
-        printf("measurement: %i\n", tof_measure());
+        printf("measurement tof 1: %i\n", tof_measure(MEGA_PIN_D43_DIGITAL));
+        if (timeoutOccurred())
+        {
+            printf("timeout");
+        }
+
+        printf("measurement tof 2: ------> %i\n", tof_measure(MEGA_PIN_D45_DIGITAL));
         if (timeoutOccurred())
         {
             printf("timeout");
