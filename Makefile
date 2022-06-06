@@ -4,9 +4,9 @@ BUILD		= $(BUILD_DIR)/build
 LIBS_DIR	= lib
 TARGET		= main.c
 LIBS		= $(wildcard $(LIBS_DIR)/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/**/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/**/**/*.c)
+# LIBS		+= $(wildcard $(LIBS_DIR)/**/*.c)
+# LIBS		+= $(wildcard $(LIBS_DIR)/**/**/*.c)
+# LIBS		+= $(wildcard $(LIBS_DIR)/**/**/**/*.c)
 OBJS		= $(patsubst  %, build/%, $(LIBS:.c=.o))
 OBJS		+= $(patsubst  %, build/%, $(TARGET:.c=.o))
 ASMS		= $(patsubst  %, build/%, $(OBJS:.o=.asm))
