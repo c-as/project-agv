@@ -26,7 +26,7 @@ ISR(TIMER2_OVF_vect)
         }
     }
 
-    if (OCR2A > 0)
+    if (OCR2B > 0)
     {
         for (int i = 0; i < AMOUNT_PWM_PINS; i++)
         {
