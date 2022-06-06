@@ -8,6 +8,6 @@ typedef enum
     AFSTAND_Z,
 } Afstanden_XYZ;
 
-void get_afstandXYZ(int tof, Afstanden_XYZ);
+void get_afstandXYZ(int tof, Afstanden_XYZ welke);
 
 #endif // BAANWISSELEN_H_INCLUDED
