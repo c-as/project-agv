@@ -8,6 +8,7 @@ void init()
 {
     serialio_init();
     tof_init();
+    initTimer0();
 }
 
 void start()
