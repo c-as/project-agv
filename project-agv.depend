@@ -18,13 +18,14 @@
 
 1654076241 c:\users\etien\onedrive\documenten\github\project-agv\lib\motor-code\motoren.h
 
-1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.c
+1654422461 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.c
 	<avr/io.h>
+	<stdio.h>
 	<stdbool.h>
 	<util/delay.h>
 	"pinio.h"
 
-1654157848 c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.h
+1654422461 c:\users\etien\onedrive\documenten\github\project-agv\lib\pinio.h
 	<inttypes.h>
 	<stdbool.h>
 
@@ -55,13 +56,14 @@
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\millis.h
 
-1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.c
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.c
 	<stdio.h>
 	<avr/interrupt.h>
+	<util/delay.h>
 	"../pinio.h"
-	"VL53L0X.h"
-	"i2cmaster.h"
-	"millis.h"
+	"vl53l0x-non-arduino/VL53L0X.h"
+	"vl53l0x-non-arduino/util/i2cmaster.h"
+	"vl53l0x-non-arduino/util/millis.h"
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x.h
 
@@ -71,22 +73,125 @@
 	"millis.h"
 	"VL53L0X.h"
 
-1654076241 source:c:\users\etien\onedrive\documenten\github\project-agv\main.c
-	"lib/motor-code/motoren.h"
-	"lib/pinio.h"
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\main.c
 	"lib/serialio.h"
+	"lib/motoren.h"
 	"lib/tof/tof.h"
 	"lib/adc.h"
-	"lib/ldr/ldr.h"
+	"lib/ldr.h"
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\serialio.h
 	<stdio.h>
 
-1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.h
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.h
+	"../pinio.h"
 
 1654028219 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\adc.c
 	<stdio.h>
 	<util/delay.h>
 	<avr/io.h>
 	"adc.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\baan_wisselen.c
+	<stdio.h>
+	<avr/io.h>
+	<util/delay.h>
+	<stdlib.h>
+	"ldr.h"
+	"adc.h"
+	"motoren.h"
+	"BaanWisselen.h"
+
+1654422461 c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr.h
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\motoren.h
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\baanwisselen.h
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr.c
+	<stdio.h>
+	<avr/io.h>
+	<util/delay.h>
+	<stdlib.h>
+	"ldr.h"
+	"adc.h"
+	"motoren.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\motoren.c
+	<avr/io.h>
+	<util/delay.h>
+	<avr/interrupt.h>
+	"motoren.h"
+	"pinio.h"
+	"pwm.h"
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\pwm.h
+	<inttypes.h>
+	"pinio.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\pwm.c
+	<avr/interrupt.h>
+	"pinio.h"
+	"pwm.h"
+	<util/delay.h>
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\rand-volgen.c
+	<avr/io.h>
+	"rand-volgen.h"
+	"tof/tof.h"
+	<stdlib.h>
+	"motoren.h"
+
+1654350037 c:\users\etien\onedrive\documenten\github\project-agv\lib\rand-volgen.h
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\stil-staan.c
+	<avr/io.h>
+	<stdio.h>
+	<stdlib.h>
+	"motoren.h"
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\vl53l0x.h
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\i2cmaster.h
+	<avr/io.h>
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\millis.h
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\debugprint.c
+	<stdint.h>
+	<avr/io.h>
+	"../vl53l0xExample.h"
+	<util/setbaud.h>
+	"debugPrint.h"
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\vl53l0xexample.h
+
+1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\debugprint.h
+	<avr/pgmspace.h>
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\i2cmaster.c
+	<inttypes.h>
+	<compat/twi.h>
+	"debugPrint.h"
+	"i2cmaster.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\util\millis.c
+	<avr/interrupt.h>
+	"millis.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\vl53l0x.c
+	<stdint.h>
+	"util/i2cmaster.h"
+	"util/millis.h"
+	"VL53L0X.h"
+
+1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x-non-arduino\vl53l0xexample.c
+	<stdint.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"util/debugPrint.h"
+	"util/i2cmaster.h"
+	"util/millis.h"
+	"VL53L0X.h"
+	"vl53l0xExample.h"
 
