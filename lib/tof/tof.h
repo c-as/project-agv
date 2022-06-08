@@ -8,6 +8,11 @@
 #define TOF_3_PIN_X MEGA_PIN_D46_DIGITAL
 #define TOF_4_PIN_X MEGA_PIN_D47_DIGITAL
 
+#define TOF_VOOR TOF_1_PIN_X
+#define TOF_ACHTER TOF_2_PIN_X
+#define TOF_RECHTS TOF_3_PIN_X
+#define TOF_LINKS TOF_4_PIN_X
+
 void tof_init();
 uint16_t tof_measure(DigitalPin tof_vin_pin);
 void tof_test();
