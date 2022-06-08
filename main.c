@@ -3,12 +3,16 @@
 #include "lib/tof/tof.h"
 #include "lib/adc.h"
 #include "lib/ldr.h"
+#include "lib/navigatie.h"
+#include "lib/pwm.h"
 
 void init()
 {
     serialio_init();
     tof_init();
-    initTimer0();
+    init_motoren();
+    adc_init();
+    pwm_init();
 }
 
 void start()
