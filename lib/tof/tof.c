@@ -5,6 +5,7 @@
 #include "vl53l0x-non-arduino/VL53L0X.h"
 #include "vl53l0x-non-arduino/util/i2cmaster.h"
 #include "vl53l0x-non-arduino/util/millis.h"
+#include "tof.h"
 
 #define TIMING_BUDGET_MS 50
 
@@ -36,16 +37,9 @@ void tof_test()
 {
     while (1)
     {
-        printf("measurement tof 1: %i\n", tof_measure(MEGA_PIN_D43_DIGITAL));
-        if (timeoutOccurred())
-        {
-            printf("timeout");
-        }
-
-        printf("measurement tof 2: ------> %i\n", tof_measure(MEGA_PIN_D45_DIGITAL));
-        if (timeoutOccurred())
-        {
-            printf("timeout");
-        }
+        printf("measurement tof 1: %i\n", tof_measure(TOF_1_PIN_X));
+        printf("measurement tof 2: ------> %i\n", tof_measure(TOF_2_PIN_X));
+        printf("measurement tof 3: ------------> %i\n", tof_measure(TOF_3_PIN_X));
+        printf("measurement tof 4: ------------------> %i\n", tof_measure(TOF_4_PIN_X));
     }
 }
