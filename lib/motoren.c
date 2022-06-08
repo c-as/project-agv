@@ -84,28 +84,28 @@ void motor_zet_duty(uint8_t duty)
 
 void rijden(RijRichting kant, uint8_t duty)
 {
-    if (kant == RIJRICHTING_VOORUIT || kant == RIJRICHTING_X_PLUS)
+    if (kant == RIJRICHTING_VOORUIT)
     {
         motor_zet_richting(1, MOTORRICHTING_CCW);
         motor_zet_richting(2, MOTORRICHTING_CW);
         motor_zet_richting(3, MOTORRICHTING_CCW);
         motor_zet_richting(4, MOTORRICHTING_CW);
     }
-    else if (kant == RIJRICHTING_ACHTERUIT || kant == RIJRICHTING_X_MIN)
+    else if (kant == RIJRICHTING_ACHTERUIT)
     {
         motor_zet_richting(1, MOTORRICHTING_CW);
         motor_zet_richting(2, MOTORRICHTING_CCW);
         motor_zet_richting(3, MOTORRICHTING_CW);
         motor_zet_richting(4, MOTORRICHTING_CCW);
     }
-    else if (kant == RIJRICHTING_LINKS || kant == RIJRICHTING_Y_PLUS)
+    else if (kant == RIJRICHTING_LINKS)
     {
         motor_zet_richting(1, MOTORRICHTING_CW);
         motor_zet_richting(2, MOTORRICHTING_CW);
         motor_zet_richting(3, MOTORRICHTING_CCW);
         motor_zet_richting(4, MOTORRICHTING_CCW);
     }
-    else if (kant == RIJRICHTING_RECHTS || kant == RIJRICHTING_Y_MIN)
+    else if (kant == RIJRICHTING_RECHTS)
     {
         motor_zet_richting(1, MOTORRICHTING_CCW);
         motor_zet_richting(2, MOTORRICHTING_CCW);
