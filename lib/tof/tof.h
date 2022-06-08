@@ -13,6 +13,11 @@
 #define TOF_RECHTS TOF_3_PIN_X
 #define TOF_LINKS TOF_4_PIN_X
 
+#define TOF_X_PLUS TOF_VOOR
+#define TOF_X_MIN TOF_ACHTER
+#define TOF_Y_PLUS TOF_LINKS
+#define TOF_Y_MIN TOF_RECHTS
+
 void tof_init();
 uint16_t tof_measure(DigitalPin tof_vin_pin);
 void tof_test();
