@@ -26,6 +26,7 @@ void init_motoren();
 void motor_zet_richting(int motor, MotorRichting kant);
 void motor_zet_duty(uint8_t duty);
 void rijden(RijRichting kant, uint8_t duty);
+void rijden_stop();
 void motoren_test();
 
 #endif

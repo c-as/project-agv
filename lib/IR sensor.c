@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include "motoren.h"
 #define IRsensor3 PC6
 #define IRsensor4 PC7
 
@@ -22,12 +23,12 @@ ISR (TIMER0_OVF_vect)
 
     if (IRsensor3_x)
     {
-        stil_staan();
+        rijden_stop();
     }
 
     else if (IRsensor4_x)
     {
-        stil_staan();
+        rijden_stop();
     }
 
 }

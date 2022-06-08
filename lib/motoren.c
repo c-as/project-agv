@@ -129,6 +129,11 @@ void rijden(RijRichting kant, uint8_t duty)
     motor_zet_duty(duty);
 }
 
+void rijden_stop()
+{
+    motor_zet_duty(0);
+}
+
 void motoren_test()
 {
     while (1)
