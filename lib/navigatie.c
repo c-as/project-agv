@@ -3,7 +3,7 @@
 #include "tof/tof.h"
 #include "motoren.h"
 
-#define VOORUIT_DIFF 50
+#define VOORUIT_DIFF_MM 50
 // zet agv parallel
 void agv_zet_recht()
 {
@@ -47,7 +47,7 @@ void agv_zet_vooruit()
         int diff_rechts = meting_voor - meting_rechts;
         int diff_links = meting_voor - meting_links;
 
-        if (diff_rechts > VOORUIT_DIFF && diff_links > VOORUIT_DIFF)
+        if (diff_rechts > VOORUIT_DIFF_MM && diff_links > VOORUIT_DIFF_MM)
         {
             break;
         }
