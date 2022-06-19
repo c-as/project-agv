@@ -5,6 +5,7 @@
 #include "lib/ldr.h"
 #include "lib/navigatie.h"
 #include "lib/pwm.h"
+#include "lib/time.h"
 
 void init()
 {
@@ -17,7 +18,8 @@ void init()
 
 void start()
 {
-    tof_test();
+    // time_test();
+    //  tof_test();
     agv_start_navigatie();
 }
 
