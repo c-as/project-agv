@@ -7,7 +7,7 @@
 // zet agv parallel
 void agv_zet_recht()
 {
-    agv_vooruit();
+    agv_zet_vooruit();
 
     uint16_t meting = tof_measure(TOF_VOOR);
 
