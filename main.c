@@ -18,6 +18,7 @@ void init()
 void start()
 {
     tof_test();
+    agv_start_navigatie();
 }
 
 int main()

@@ -7,6 +7,11 @@
 #define VOORUIT_DIFF_MM 50
 #define MUUR_DIFF_MM 2
 #define DUTY_MUUR 255
+
+void agv_start_navigatie()
+{
+}
+
 DigitalPin rijrichting_tof(RijRichting richting)
 {
     switch (richting)
