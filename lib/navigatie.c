@@ -163,8 +163,8 @@ void agv_zet_recht()
 void agv_weg_vinden()
 {
     agv_zet_recht();
-    agv_muur_afstand(RIJRICHTING_X_PLUS, 10);
-    agv_muur_afstand(RIJRICHTING_Y_PLUS, 10);
+    agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
+    agv_muur_afstand(RIJRICHTING_LINKS, 10);
 }
 
 void agv_start_navigatie()
