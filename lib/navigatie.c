@@ -107,6 +107,30 @@ int agv_muren_midden(RijRichting ene_kant)
     return 0;
 }
 
+// zet agv ongeveer vooruit met de voorkant in de richting van een pad
+void agv_zet_vooruit()
+{
+    uint16_t meting_voor = tof_measure(TOF_X_PLUS);
+    uint16_t meting_rechts = tof_measure(TOF_Y_MIN);
+    uint16_t meting_links = tof_measure(TOF_Y_PLUS);
+
+    // draai net zo lang todat tof voor de grootste afstand meet
+    rijden(RIJRICHTING_CW, 50);
+
+    while (1)
+    {
+        int diff_rechts = meting_voor - meting_rechts;
+        int diff_links = meting_voor - meting_links;
+
+        if (diff_rechts > VOORUIT_DIFF_MM && diff_links > VOORUIT_DIFF_MM)
+        {
+            break;
+        }
+    }
+
+    rijden_stop();
+}
+
 // zet agv parallel
 void agv_zet_recht()
 {
@@ -130,30 +154,6 @@ void agv_zet_recht()
         }
 
         last_diff = diff;
-    }
-
-    rijden_stop();
-}
-
-// zet agv ongeveer vooruit met de voorkant in de richting van een pad
-void agv_zet_vooruit()
-{
-    uint16_t meting_voor = tof_measure(TOF_X_PLUS);
-    uint16_t meting_rechts = tof_measure(TOF_Y_MIN);
-    uint16_t meting_links = tof_measure(TOF_Y_PLUS);
-
-    // draai net zo lang todat tof voor de grootste afstand meet
-    rijden(RIJRICHTING_CW, 50);
-
-    while (1)
-    {
-        int diff_rechts = meting_voor - meting_rechts;
-        int diff_links = meting_voor - meting_links;
-
-        if (diff_rechts > VOORUIT_DIFF_MM && diff_links > VOORUIT_DIFF_MM)
-        {
-            break;
-        }
     }
 
     rijden_stop();
