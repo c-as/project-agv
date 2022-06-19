@@ -1,12 +1,11 @@
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
+
 #build
 BUILD_DIR	= build
 BUILD		= $(BUILD_DIR)/build
 LIBS_DIR	= lib
 TARGET		= main.c
-LIBS		= $(wildcard $(LIBS_DIR)/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/**/*.c)
-LIBS		+= $(wildcard $(LIBS_DIR)/**/**/**/*.c)
+LIBS		= $(call rwildcard,$(LIBS_DIR)/,*.c)
 OBJS		= $(patsubst  %, build/%, $(LIBS:.c=.o))
 OBJS		+= $(patsubst  %, build/%, $(TARGET:.c=.o))
 ASMS		= $(patsubst  %, build/%, $(OBJS:.o=.asm))
