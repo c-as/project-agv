@@ -2,7 +2,7 @@
  
 int ch_prime(int); //Prototyping the function for testing a number to be prime or not
  
-int main(void)
+int init_infraroodsensor(void)
 {
           uint8_t num=0, res; //Creating variables 'num' & 'res' for storing the number of detections & result of the function respectively
           DDRA &= ~(1<<0); //Setting 0th pin of Port A as input
