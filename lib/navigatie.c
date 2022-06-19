@@ -8,10 +8,6 @@
 #define MUUR_DIFF_MM 2
 #define DUTY_MUUR 255
 
-void agv_start_navigatie()
-{
-}
-
 DigitalPin rijrichting_tof(RijRichting richting)
 {
     switch (richting)
@@ -162,4 +158,16 @@ void agv_zet_recht()
     }
 
     rijden_stop();
+}
+
+void agv_weg_vinden()
+{
+    agv_zet_recht();
+    agv_muur_afstand(RIJRICHTING_X_PLUS, 10);
+    agv_muur_afstand(RIJRICHTING_Y_PLUS, 10);
+}
+
+void agv_start_navigatie()
+{
+    agv_weg_vinden();
 }
