@@ -160,7 +160,7 @@ void agv_zet_recht()
     rijden_stop();
 }
 
-void agv_weg_vinden()
+void agv_start_positie()
 {
     agv_zet_recht();
     agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
@@ -169,5 +169,5 @@ void agv_weg_vinden()
 
 void agv_start_navigatie()
 {
-    agv_weg_vinden();
+    agv_start_positie();
 }
