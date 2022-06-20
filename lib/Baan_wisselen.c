@@ -5,7 +5,7 @@
 #include "ldr.h"
 #include "adc.h"
 #include "motoren.h"
-#include "BaanWisselen.h"
+#include "baan_wisselen.h"
 #include "tof/tof.h"
 
 void baan_wisselen()
