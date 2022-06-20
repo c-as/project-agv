@@ -7,6 +7,7 @@
 #define VOORUIT_DIFF_MM 50
 #define MUUR_DIFF_MM 2
 #define DUTY_MUUR 255
+#define TARGET_STAP_MM 20
 
 DigitalPin rijrichting_tof(RijRichting richting)
 {
@@ -160,6 +161,31 @@ void agv_zet_recht(RijRichting probe_muur)
     }
 
     rijden_stop();
+}
+
+void agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
+{
+    DigitalPin tof_volg = rijrichting_tof(volg_muur);
+    DigitalPin tof_target = rijrichting_tof(target_muur);
+    if (!tof_volg.pin || !tof_target.pin)
+    {
+        printf("navigatie.c error: agv_muur_afstand(): geen tof\n");
+        return 1;
+    }
+
+    uint16_t volg_afstand = tof_measure(tof_volg);
+    uint16_t meting_target = tof_measure(tof_target);
+    while (abs(meting_target - target_afstand_mm) > MUUR_DIFF_MM)
+    {
+        agv_zet_recht(volg_muur);
+
+        if (meting_target < target_afstand_mm)
+            agv_muur_afstand(target_muur, meting_target - TARGET_STAP_MM);
+        else
+            agv_muur_afstand(target_muur, meting_target + TARGET_STAP_MM);
+
+        agv_muur_afstand(volg_muur, volg_afstand);
+    }
 }
 
 void agv_start_positie()
