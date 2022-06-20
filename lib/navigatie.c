@@ -133,11 +133,13 @@ void agv_zet_vooruit()
 }
 
 // zet agv parallel
-void agv_zet_recht()
+void agv_zet_recht(RijRichting probe_muur)
 {
     agv_zet_vooruit();
 
-    uint16_t meting = tof_measure(TOF_VOOR);
+    DigitalPin tof = rijrichting_tof(probe_muur);
+
+    uint16_t meting = tof_measure(tof);
 
     // draai super sloom
     rijden(RIJRICHTING_CW, 10);
@@ -147,7 +149,7 @@ void agv_zet_recht()
     // als het goed is wordt het verschil nu alleen maar kleiner totdat de agv recht staat
     while (1)
     {
-        int diff = meting - tof_measure(TOF_VOOR);
+        int diff = meting - tof_measure(tof);
 
         if (diff > last_diff)
         {
@@ -162,7 +164,7 @@ void agv_zet_recht()
 
 void agv_start_positie()
 {
-    agv_zet_recht();
+    agv_zet_recht(RIJRICHTING_RECHTS);
     agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
     agv_muur_afstand(RIJRICHTING_LINKS, 10);
 }
