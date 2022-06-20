@@ -163,7 +163,7 @@ void agv_zet_recht(RijRichting probe_muur)
     rijden_stop();
 }
 
-void agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
+int agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
 {
     DigitalPin tof_volg = rijrichting_tof(volg_muur);
     DigitalPin tof_target = rijrichting_tof(target_muur);
@@ -186,6 +186,8 @@ void agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16
 
         agv_muur_afstand(volg_muur, volg_afstand);
     }
+
+    return 0;
 }
 
 void baan_wisselen()
