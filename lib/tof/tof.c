@@ -14,12 +14,19 @@ void tof_init()
     i2cmaster_init();
     initMillis();
     sei();
+
+    pin_set_mode(TOF_1_PIN_X, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(TOF_2_PIN_X, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(TOF_3_PIN_X, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(TOF_4_PIN_X, PINMODE_DIGITAL_OUTPUT);
 }
 
 uint16_t tof_measure(DigitalPin tof_x_pin)
 {
     // zet de pin laag
-    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_INPUT_PULLUP);
+
+    _delay_ms(1);
 
     initVL53L0X(1);
     setMeasurementTimingBudget(TIMING_BUDGET_MS * 1000UL);
@@ -27,8 +34,10 @@ uint16_t tof_measure(DigitalPin tof_x_pin)
     statInfo_t xTraStats;
     uint16_t measurement = readRangeSingleMillimeters(&xTraStats);
 
+    _delay_ms(1);
+
     // zet de pin weer hoog
-    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_INPUT_PULLUP);
+    pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
 
     return measurement / 2;
 }

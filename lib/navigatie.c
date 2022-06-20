@@ -7,6 +7,7 @@
 #define VOORUIT_DIFF_MM 50
 #define MUUR_DIFF_MM 2
 #define DUTY_MUUR 255
+#define TARGET_STAP_MM 20
 
 DigitalPin rijrichting_tof(RijRichting richting)
 {
@@ -133,11 +134,13 @@ void agv_zet_vooruit()
 }
 
 // zet agv parallel
-void agv_zet_recht()
+void agv_zet_recht(RijRichting probe_muur)
 {
     agv_zet_vooruit();
 
-    uint16_t meting = tof_measure(TOF_VOOR);
+    DigitalPin tof = rijrichting_tof(probe_muur);
+
+    uint16_t meting = tof_measure(tof);
 
     // draai super sloom
     rijden(RIJRICHTING_CW, 10);
@@ -147,7 +150,7 @@ void agv_zet_recht()
     // als het goed is wordt het verschil nu alleen maar kleiner totdat de agv recht staat
     while (1)
     {
-        int diff = meting - tof_measure(TOF_VOOR);
+        int diff = meting - tof_measure(tof);
 
         if (diff > last_diff)
         {
@@ -160,9 +163,34 @@ void agv_zet_recht()
     rijden_stop();
 }
 
+void agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
+{
+    DigitalPin tof_volg = rijrichting_tof(volg_muur);
+    DigitalPin tof_target = rijrichting_tof(target_muur);
+    if (!tof_volg.pin || !tof_target.pin)
+    {
+        printf("navigatie.c error: agv_muur_afstand(): geen tof\n");
+        return 1;
+    }
+
+    uint16_t volg_afstand = tof_measure(tof_volg);
+    uint16_t meting_target = tof_measure(tof_target);
+    while (abs(meting_target - target_afstand_mm) > MUUR_DIFF_MM)
+    {
+        agv_zet_recht(volg_muur);
+
+        if (meting_target < target_afstand_mm)
+            agv_muur_afstand(target_muur, meting_target - TARGET_STAP_MM);
+        else
+            agv_muur_afstand(target_muur, meting_target + TARGET_STAP_MM);
+
+        agv_muur_afstand(volg_muur, volg_afstand);
+    }
+}
+
 void agv_start_positie()
 {
-    agv_zet_recht();
+    agv_zet_recht(RIJRICHTING_RECHTS);
     agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
     agv_muur_afstand(RIJRICHTING_LINKS, 10);
 }
