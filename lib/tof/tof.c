@@ -28,7 +28,7 @@ void tof_init()
 
 uint16_t tof_measure(DigitalPin tof_x_pin)
 {
-    // zet de pin laag
+    // zet de pin hoog
     pin_set_mode(tof_x_pin, PINMODE_DIGITAL_INPUT_PULLUP);
 
     wacht_millis(1);
@@ -41,7 +41,7 @@ uint16_t tof_measure(DigitalPin tof_x_pin)
 
     wacht_millis(1);
 
-    // zet de pin weer hoog
+    // zet de pin weer laag
     pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
 
     return measurement / 2;
