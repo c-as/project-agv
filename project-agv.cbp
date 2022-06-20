@@ -50,36 +50,26 @@
 			<Add after="srec_cat $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).fuse -Intel -crop 0x01 0x02 -offset -0x01 -O $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).hfs -Intel " />
 			<Add after="srec_cat $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).fuse -Intel -crop 0x02 0x03 -offset -0x02 -O $(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).efs -Intel " />
 		</ExtraCommands>
-		<Unit filename="lib/BaanWisselen.h" />
-		<Unit filename="lib/Baan_wisselen.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/IR sensor.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/Stil-staan.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="lib/adc.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/adc.h" />
-		<Unit filename="lib/i2c.c">
+		<Unit filename="lib/ir.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib/i2c.h" />
+		<Unit filename="lib/ir.h" />
 		<Unit filename="lib/ldr.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/ldr.h" />
-		<Unit filename="lib/motor-code/motoren.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/motor-code/motoren.h" />
 		<Unit filename="lib/motoren.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/motoren.h" />
+		<Unit filename="lib/navigatie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/navigatie.h" />
 		<Unit filename="lib/pinio.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -88,30 +78,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/pwm.h" />
-		<Unit filename="lib/rand-volgen.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/rand-volgen.h" />
-		<Unit filename="lib/rand-volgen/defines.h" />
-		<Unit filename="lib/rand-volgen/rand-volgen.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="lib/serialio.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/serialio.h" />
-		<Unit filename="lib/tof/VL53L0X.c">
+		<Unit filename="lib/time.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib/tof/VL53L0X.h" />
-		<Unit filename="lib/tof/i2cmaster.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/tof/i2cmaster.h" />
-		<Unit filename="lib/tof/millis.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/tof/millis.h" />
+		<Unit filename="lib/time.h" />
 		<Unit filename="lib/tof/tof.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -136,10 +110,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/tof/vl53l0x-non-arduino/vl53l0xExample.h" />
-		<Unit filename="lib/vec.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="lib/vec.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
