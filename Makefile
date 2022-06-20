@@ -31,13 +31,15 @@ $(BUILD_DIR)/%.asm: %.c
 	$(COMPILE) -S -c $< -o $@
 
 $(BUILD_DIR)/%.o: %.c
+	@echo ---------------------------------------------------------------------------
+	@echo Makefile: $< compilen...
+	@echo ---------------------------------------------------------------------------
 	mkdir -p $(@D)
 	$(COMPILE) $(FLAGS) -c $< -o $@
 
 compile: clean $(OBJS)
 	@echo ---------------------------------------------------------------------------
-	@echo Makefile: Compileren bestanden:
-	@echo $(LIBS).
+	@echo Makefile: Objecten linken...
 	@echo ---------------------------------------------------------------------------
 	$(COMPILE) -o $(BUILD).elf $(OBJS)
 	avr-objcopy -j .text -j .data -O ihex $(BUILD).elf $(BUILD).hex
