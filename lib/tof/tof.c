@@ -19,6 +19,11 @@ void tof_init()
     pin_set_mode(TOF_2_PIN_X, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(TOF_3_PIN_X, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(TOF_4_PIN_X, PINMODE_DIGITAL_OUTPUT);
+
+    pin_set_output(TOF_1_PIN_X, 0);
+    pin_set_output(TOF_2_PIN_X, 0);
+    pin_set_output(TOF_3_PIN_X, 0);
+    pin_set_output(TOF_4_PIN_X, 0);
 }
 
 uint16_t tof_measure(DigitalPin tof_x_pin)
