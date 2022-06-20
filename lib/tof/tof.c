@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
 #include "../pinio.h"
 #include "vl53l0x-non-arduino/VL53L0X.h"
 #include "vl53l0x-non-arduino/util/i2cmaster.h"
 #include "vl53l0x-non-arduino/util/millis.h"
 #include "tof.h"
+#include "../time.h"
 
 #define TIMING_BUDGET_MS 50
 
@@ -26,7 +26,7 @@ uint16_t tof_measure(DigitalPin tof_x_pin)
     // zet de pin laag
     pin_set_mode(tof_x_pin, PINMODE_DIGITAL_INPUT_PULLUP);
 
-    _delay_ms(1);
+    wacht_millis(1);
 
     initVL53L0X(1);
     setMeasurementTimingBudget(TIMING_BUDGET_MS * 1000UL);
@@ -34,7 +34,7 @@ uint16_t tof_measure(DigitalPin tof_x_pin)
     statInfo_t xTraStats;
     uint16_t measurement = readRangeSingleMillimeters(&xTraStats);
 
-    _delay_ms(1);
+    wacht_millis(1);
 
     // zet de pin weer hoog
     pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
