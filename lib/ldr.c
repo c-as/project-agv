@@ -63,30 +63,27 @@ void ldr_vergelijken()
 
 void ldr_volgen()
 {
-    while (1)
+    // LDR > 100
+    if (adc_convert(PIN_LDR0) < MIN_LICHT || adc_convert(PIN_LDR1) < MIN_LICHT)
     {
-        // LDR > 100
-        if (adc_convert(PIN_LDR0) < MIN_LICHT || adc_convert(PIN_LDR1) < MIN_LICHT)
+        // ToF 1 en 2 > 20
+        if (1)
         {
-            // ToF 1 en 2 > 20
-            if (1)
+            printf("ldr: vergelijken\n");
+            while (1)
             {
-                printf("ldr: vergelijken\n");
-                while (1)
-                {
-                    ldr_vergelijken();
-                }
-            }
-            // ToF 1 en 2 < 20
-            else
-            {
-                // Motoren uit
-                motor_zet_duty(0);
-                printf("ldr: motors uit\n");
+                ldr_vergelijken();
             }
         }
-        printf("get_light0: %i\n", adc_convert(PIN_LDR0));
-        printf("get_light1: %i\n", adc_convert(PIN_LDR1));
-        _delay_ms(100);
+        // ToF 1 en 2 < 20
+        else
+        {
+            // Motoren uit
+            motor_zet_duty(0);
+            printf("ldr: motors uit\n");
+        }
     }
+    printf("get_light0: %i\n", adc_convert(PIN_LDR0));
+    printf("get_light1: %i\n", adc_convert(PIN_LDR1));
+    _delay_ms(100);
 }
