@@ -21,7 +21,7 @@ void start()
     // time_test();
     //  tof_test();
     ldr_volgen();
-    agv_start_navigatie();
+//    agv_start_navigatie();
 }
 
 int main()

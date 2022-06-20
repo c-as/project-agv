@@ -56,7 +56,7 @@
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\millis.h
 
-1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.c
+1655656716 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\tof.c
 	<stdio.h>
 	<avr/interrupt.h>
 	<util/delay.h>
@@ -64,6 +64,7 @@
 	"vl53l0x-non-arduino/VL53L0X.h"
 	"vl53l0x-non-arduino/util/i2cmaster.h"
 	"vl53l0x-non-arduino/util/millis.h"
+	"tof.h"
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\tof\vl53l0x.h
 
@@ -73,12 +74,15 @@
 	"millis.h"
 	"VL53L0X.h"
 
-1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\main.c
+1655719034 source:c:\users\etien\onedrive\documenten\github\project-agv\main.c
 	"lib/serialio.h"
 	"lib/motoren.h"
 	"lib/tof/tof.h"
 	"lib/adc.h"
 	"lib/ldr.h"
+	"lib/navigatie.h"
+	"lib/pwm.h"
+	"lib/time.h"
 
 1654002033 c:\users\etien\onedrive\documenten\github\project-agv\lib\serialio.h
 	<stdio.h>
@@ -92,7 +96,7 @@
 	<avr/io.h>
 	"adc.h"
 
-1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\baan_wisselen.c
+1655719063 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\baan_wisselen.c
 	<stdio.h>
 	<avr/io.h>
 	<util/delay.h>
@@ -101,6 +105,7 @@
 	"adc.h"
 	"motoren.h"
 	"BaanWisselen.h"
+	"tof/tof.h"
 
 1654422461 c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr.h
 
@@ -108,7 +113,7 @@
 
 1654610719 c:\users\etien\onedrive\documenten\github\project-agv\lib\baanwisselen.h
 
-1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr.c
+1655719083 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\ldr.c
 	<stdio.h>
 	<avr/io.h>
 	<util/delay.h>
@@ -116,8 +121,9 @@
 	"ldr.h"
 	"adc.h"
 	"motoren.h"
+	"tof/tof.h"
 
-1654610719 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\motoren.c
+1655656716 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\motoren.c
 	<avr/io.h>
 	<util/delay.h>
 	<avr/interrupt.h>
@@ -194,4 +200,25 @@
 	"util/millis.h"
 	"VL53L0X.h"
 	"vl53l0xExample.h"
+
+1655656716 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\infraroodsensor.c
+
+1655656716 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\ir_sensor.c
+
+1655713183 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\navigatie.c
+	<stdlib.h>
+	<avr/io.h>
+	"tof/tof.h"
+	"motoren.h"
+	<stdio.h>
+
+1655713183 source:c:\users\etien\onedrive\documenten\github\project-agv\lib\time.c
+	<inttypes.h>
+	"tof/vl53l0x-non-arduino/util/millis.h"
+	"pinio.h"
+	<avr/io.h>
+
+1655713183 c:\users\etien\onedrive\documenten\github\project-agv\lib\navigatie.h
+
+1655713183 c:\users\etien\onedrive\documenten\github\project-agv\lib\time.h
 

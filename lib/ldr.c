@@ -7,6 +7,7 @@
 #include "ldr.h"
 #include "adc.h"
 #include "motoren.h"
+#include "tof/tof.h"
 
 #define MIN_VERSCHIL 30
 #define MIN_LICHT 80
@@ -67,7 +68,7 @@ void ldr_volgen()
     if (adc_convert(PIN_LDR0) < MIN_LICHT || adc_convert(PIN_LDR1) < MIN_LICHT)
     {
         // ToF 1 en 2 > 20
-        if (1)
+        if (tof_measure(TOF_1_PIN_X) > 20 || tof_measure(TOF_2_PIN_X) > 20)
         {
             printf("ldr: vergelijken\n");
             while (1)
