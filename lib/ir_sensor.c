@@ -1,34 +1,28 @@
-// #include <avr/io.h>
-// #include "motoren.h"
-// #define IRsensor3 PC6
-// #define IRsensor4 PC7
+#include <avr/io.h>
+#include "motoren.h"
+#include "pinio.h"
+#include "time.h"
 
-// void initTimer0 (void)
-// {
-//     TCCR0A = 0;
-//     TCCR0B = TCCR0B | (1<<CS01) | (1<<CS00);
-//     TIMSK0 = TIMSK0 | (1<< TOIE0);
-// }
+#define IR_1 MEGA_PIN_D31_DIGITAL
+#define IR_2 MEGA_PIN_D30_DIGITAL
+#define WACHTTIJD_MILLIS 1000
 
-// void IRsensoren ()
-// {
-//     DDRC &= ~(1<<IRsensor3);
-//     DDRC &= ~(1<<IRsensor4);
-// }
+void ir_init()
+{
+    pin_set_mode(IR_1, PINMODE_DIGITAL_INPUT);
+    pin_set_mode(IR_2, PINMODE_DIGITAL_INPUT);
+}
 
-// ISR (TIMER0_OVF_vect)
-// {
-//     int IRsensor3_x = !(PINC &(1 << IRsensor3));
-//     int IRsensor4_x = !(PINC &(1 << IRsensor4));
-
-//     if (IRsensor3_x)
-//     {
-//         rijden_stop();
-//     }
-
-//     else if (IRsensor4_x)
-//     {
-//         rijden_stop();
-//     }
-
-// }
+void check_ir()
+{
+    if (pin_get_input(IR_1))
+    {
+        rijden_stop();
+        wacht_millis(WACHTTIJD_MILLIS);
+    }
+    if (pin_get_input(IR_2))
+    {
+        rijden_stop();
+        wacht_millis(WACHTTIJD_MILLIS);
+    }
+}
