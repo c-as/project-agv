@@ -3,5 +3,6 @@
 
 void ldr_vergelijken();
 void ldr_volgen();
+void ldr_check();
 
 #endif
