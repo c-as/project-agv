@@ -5,8 +5,8 @@
 
 #define AMOUNT_PWM_PINS 8
 
-DigitalPin pwm_pinsa[AMOUNT_PWM_PINS] = {0};
-DigitalPin pwm_pinsb[AMOUNT_PWM_PINS] = {0};
+DigitalPin pwm_pinsa[AMOUNT_PWM_PINS] = {{0}};
+DigitalPin pwm_pinsb[AMOUNT_PWM_PINS] = {{0}};
 
 void pwm_init()
 {
