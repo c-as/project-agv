@@ -4,8 +4,6 @@
 #include "time.h"
 #include "ir.h"
 
-#define IR_1 MEGA_PIN_D31_DIGITAL
-#define IR_2 MEGA_PIN_D30_DIGITAL
 #define WACHTTIJD_MILLIS 1000
 
 void ir_init()
