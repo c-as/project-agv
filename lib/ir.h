@@ -1,4 +1,4 @@
-#ifdef _IR_H_
+#ifndef _IR_H_
 #define _IR_H_
 
 #define IR_1 MEGA_PIN_D31_DIGITAL
