@@ -13,9 +13,6 @@
 #define VOLG_SNELHEID 100
 #define DRAAI_SNELHEID 50
 
-#define PIN_LDR0 MEGA_PIN_A0_ANALOG
-#define PIN_LDR1 MEGA_PIN_A1_ANALOG
-
 void ldr_vergelijken()
 {
     // verschil bestaat
