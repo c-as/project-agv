@@ -8,8 +8,8 @@
 
 void ir_init()
 {
-    pin_set_mode(IR_1, PINMODE_DIGITAL_INPUT);
-    pin_set_mode(IR_2, PINMODE_DIGITAL_INPUT);
+    pin_set_mode(IR_1, PINMODE_DIGITAL_INPUT_PULLUP);
+    pin_set_mode(IR_2, PINMODE_DIGITAL_INPUT_PULLUP);
 }
 
 void check_ir()
