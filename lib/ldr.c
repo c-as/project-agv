@@ -16,10 +16,10 @@
 void ldr_vergelijken()
 {
     // verschil bestaat
-    if (abs(adc_convert(PIN_LDR0) - adc_convert(PIN_LDR1)) > MIN_VERSCHIL)
+    if (abs(adc_convert(PIN_LDR2) - adc_convert(PIN_LDR1)) > MIN_VERSCHIL)
     {
         // LDR 1 < 2
-        if (adc_convert(PIN_LDR0) < adc_convert(PIN_LDR1))
+        if (adc_convert(PIN_LDR2) < adc_convert(PIN_LDR1))
         {
             // Rechtsom draaien
             rijden(RIJRICHTING_CW, DRAAI_SNELHEID);
@@ -57,7 +57,7 @@ void ldr_volgen()
 void ldr_check()
 {
     // als er genoeg licht is begin volgen
-    while (adc_convert(PIN_LDR0) < MIN_LICHT || adc_convert(PIN_LDR1) < MIN_LICHT)
+    while (adc_convert(PIN_LDR2) < MIN_LICHT || adc_convert(PIN_LDR1) < MIN_LICHT)
     {
         ldr_volgen();
     }
