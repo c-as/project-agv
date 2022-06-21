@@ -6,6 +6,7 @@
 #include "lib/navigatie.h"
 #include "lib/pwm.h"
 #include "lib/time.h"
+#include "lib/ir.h"
 
 void init()
 {
@@ -14,6 +15,7 @@ void init()
     init_motoren();
     adc_init();
     pwm_init();
+    ir_init();
 }
 
 void start()
