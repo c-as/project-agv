@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 #include <stdbool.h>
+#include <avr/io.h>
 
 #define MEGA_PIN_A0_DIGITAL \
     (DigitalPin) { .pDDR = &DDRF, .pPIN = &PINF, .pPORT = &PORTF, .pin = PF0 }
