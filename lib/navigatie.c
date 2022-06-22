@@ -201,10 +201,10 @@ int agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_
 void baan_wisselen()
 {
     // ToF 1/2 < 170
-    if (1)
+    if (tof_measure(TOF_1_PIN_X) < 170)
     {
         /// ToF 1, 2 & 4 uitlezen (X)
-        // uint16_t X = tof_measure(TOF_4_PIN_X);
+        uint16_t X = tof_measure(TOF_4_PIN_X);
         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
         // ToF 1 < 2
         if (tof_measure(TOF_1_PIN_X) < tof_measure(TOF_2_PIN_X))
@@ -214,22 +214,27 @@ void baan_wisselen()
             if (tof_measure(TOF_2_PIN_X) < 40)
             {
                 /// ToF 4 uitlezen (Y)
-                // uint16_t Y1 = tof_measure(TOF_4_PIN_X);
+                uint16_t Y1 = tof_measure(TOF_4_PIN_X);
                 /// afstand Z = Y-X
-                // uint16_t Z1 = Y1 - X;
+                uint16_t Z1 = Y1 - X;
                 //  ToF 1 > 30
-                if (tof_measure(TOF_1_PIN_X) > 40)
+                if (tof_measure(TOF_1_PIN_X) > 100)
                 {
                     /// Rijden y-as met afstand Z
                     // ToF 4 + Z == ToF 4
+                    int Z1Dist = Z1 + tof_measure(TOF_4_PIN_X);
+                    while(tof_measure(TOF_4_PIN_X) < Z1Dist)
+                    {
+                        rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
+                    }
                     rijden(RIJRICHTING_X_MIN, UINT8_MAX);
                     // ToF 4 < 30
-                    if (tof_measure(TOF_4_PIN_X) < 40)
+                    if (tof_measure(TOF_4_PIN_X) < 50)
                     {
                         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
 
                         // ToF 4 < 20
-                        if (tof_measure(TOF_4_PIN_X) < 40)
+                        if (tof_measure(TOF_3_PIN_X) < 40)
                         {
                             // uit de functie baan wisselen
                             rijden(RIJRICHTING_X_MIN, UINT8_MAX);
@@ -239,32 +244,37 @@ void baan_wisselen()
             }
         }
         // ToF 1 > 2
-        else
+        else if(tof_measure(TOF_1_PIN_X) > tof_measure(TOF_2_PIN_X))
         {
             /// ToF 1 uitlezen
             // ToF 1 < 30
             if (tof_measure(TOF_1_PIN_X) < 40)
             {
                 /// ToF 4 uitlezen (Y)
-                // uint16_t Y2 = tof_measure(TOF_4_PIN_X);
+                uint16_t Y2 = tof_measure(TOF_4_PIN_X);
                 /// afstand Z = Y-X
-                // uint16_t Z2 = Y2 - X;
+                uint16_t Z2 = Y2 - X;
                 //  ToF 1 > 30
-                if (tof_measure(TOF_1_PIN_X) > 40)
+                if (tof_measure(TOF_1_PIN_X) > 100)
                 {
                     /// Rijden y-as met afstand Z
                     // ToF 4 + Z == ToF 4
-                    rijden(RIJRICHTING_X_MIN, UINT8_MAX);
+                    int Z2Dist = Z2 + tof_measure(TOF_4_PIN_X);
+                    while(tof_measure(TOF_4_PIN_X) < Z2Dist)
+                    {
+                        rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
+                    }
+                    rijden(RIJRICHTING_X_PLUS, UINT8_MAX);
                     // ToF 4 < 30
-                    if (tof_measure(TOF_4_PIN_X) < 40)
+                    if (tof_measure(TOF_4_PIN_X) < 50)
                     {
                         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
 
                         // ToF 4 < 20
-                        if (tof_measure(TOF_4_PIN_X) < 40)
+                        if (tof_measure(TOF_3_PIN_X) < 40)
                         {
-                            rijden(RIJRICHTING_X_PLUS, UINT8_MAX);
                             // uit de functie baan wisselen
+                            rijden(RIJRICHTING_X_PLUS, UINT8_MAX);
                         }
                     }
                 }
