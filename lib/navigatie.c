@@ -9,6 +9,7 @@
 #define DUTY_MUUR 255
 #define TARGET_STAP_MM 20
 
+// Converteer een motoren.h rijrichting naar tof sensor poort
 DigitalPin rijrichting_tof(RijRichting richting)
 {
     switch (richting)
@@ -31,6 +32,8 @@ DigitalPin rijrichting_tof(RijRichting richting)
     }
 }
 
+// agv probeert afstand te verkrijgen met gegeven muur
+// werkt alleen als tof recht staat
 int agv_muur_afstand(RijRichting richting, int afstand_mm)
 {
     DigitalPin tof = rijrichting_tof(richting);
@@ -80,6 +83,8 @@ int agv_muur_afstand(RijRichting richting, int afstand_mm)
     return 0;
 }
 
+// agv probeert in het midden tussen 2 muren te komen
+// werkt alleen als agv recht staat en muren parallel
 int agv_muren_midden(RijRichting ene_kant)
 {
     RijRichting andere_kant;
@@ -133,7 +138,8 @@ void agv_zet_vooruit()
     rijden_stop();
 }
 
-// zet agv parallel
+// zet agv parallel met muur
+// werkt alleen als agv al ongeveer recht staat (+- 45 graden)
 void agv_zet_recht(RijRichting probe_muur)
 {
     agv_zet_vooruit();
@@ -163,6 +169,7 @@ void agv_zet_recht(RijRichting probe_muur)
     rijden_stop();
 }
 
+// agv probeert op staande afstand rand te volgen om een target afstand op een andere muur te verkrijgen
 int agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
 {
     DigitalPin tof_volg = rijrichting_tof(volg_muur);
