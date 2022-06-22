@@ -25,6 +25,9 @@ void start()
     //  tof_test();
     ldr_volgen();
 //    agv_start_navigatie();
+    while (1)
+    {
+    }
 }
 
 int main()
