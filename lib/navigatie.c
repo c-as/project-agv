@@ -190,6 +190,9 @@ int agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_
             agv_muur_afstand(target_muur, meting_target + TARGET_STAP_MM);
 
         agv_muur_afstand(volg_muur, volg_afstand);
+
+        volg_afstand = tof_measure(tof_volg);
+        meting_target = tof_measure(tof_target);
     }
 
     return 0;
