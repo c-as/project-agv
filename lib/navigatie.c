@@ -283,5 +283,38 @@ void agv_start_positie()
 
 void agv_start_navigatie()
 {
-    agv_start_positie();
+    uint16_t rand_afstand = tof_measure(TOF_3_PIN_X);
+    uint16_t target = 100;
+    int snelheid = 80;
+    int marge = 10;
+    while (1)
+    {
+        uint16_t meting_rand = tof_measure(TOF_3_PIN_X);
+
+        if (abs(meting_rand - rand_afstand) < marge)
+        {
+            uint16_t meting_target = tof_measure(TOF_1_PIN_X);
+
+            if (abs(meting_target - target) < marge)
+            {
+                rijden_stop();
+            }
+            else if (meting_target > target)
+            {
+                rijden(RIJRICHTING_VOORUIT, snelheid);
+            }
+            else if (meting_target < target)
+            {
+                rijden(RIJRICHTING_ACHTERUIT, snelheid);
+            }
+        }
+        else if (meting_rand > rand_afstand)
+        {
+            rijden(RIJRICHTING_RECHTS, snelheid);
+        }
+        else if (meting_rand < rand_afstand)
+        {
+            rijden(RIJRICHTING_LINKS, snelheid);
+        }
+    }
 }
