@@ -170,37 +170,6 @@ void agv_zet_recht(RijRichting probe_muur)
     rijden_stop();
 }
 
-// agv probeert op staande afstand rand te volgen om een target afstand op een andere muur te verkrijgen
-int agv_volg_rand_target(RijRichting volg_muur, RijRichting target_muur, uint16_t target_afstand_mm)
-{
-    DigitalPin tof_volg = rijrichting_tof(volg_muur);
-    DigitalPin tof_target = rijrichting_tof(target_muur);
-    if (!tof_volg.pin || !tof_target.pin)
-    {
-        printf("navigatie.c error: agv_muur_afstand(): geen tof\n");
-        return 1;
-    }
-
-    uint16_t volg_afstand = tof_measure(tof_volg);
-    uint16_t meting_target = tof_measure(tof_target);
-    while (abs(meting_target - target_afstand_mm) > MUUR_DIFF_MM)
-    {
-        agv_zet_recht(volg_muur);
-
-        if (meting_target < target_afstand_mm)
-            agv_muur_afstand(target_muur, meting_target - TARGET_STAP_MM);
-        else
-            agv_muur_afstand(target_muur, meting_target + TARGET_STAP_MM);
-
-        agv_muur_afstand(volg_muur, volg_afstand);
-
-        volg_afstand = tof_measure(tof_volg);
-        meting_target = tof_measure(tof_target);
-    }
-
-    return 0;
-}
-
 void baan_wisselen()
 {
     // ToF 1/2 < 170
@@ -226,7 +195,7 @@ void baan_wisselen()
                     /// Rijden y-as met afstand Z
                     // ToF 4 + Z == ToF 4
                     int Z1Dist = Z1 + tof_measure(TOF_4_PIN_X);
-                    while(tof_measure(TOF_4_PIN_X) < Z1Dist)
+                    while (tof_measure(TOF_4_PIN_X) < Z1Dist)
                     {
                         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
                     }
@@ -247,7 +216,7 @@ void baan_wisselen()
             }
         }
         // ToF 1 > 2
-        else if(tof_measure(TOF_1_PIN_X) > tof_measure(TOF_2_PIN_X))
+        else if (tof_measure(TOF_1_PIN_X) > tof_measure(TOF_2_PIN_X))
         {
             /// ToF 1 uitlezen
             // ToF 1 < 30
@@ -263,7 +232,7 @@ void baan_wisselen()
                     /// Rijden y-as met afstand Z
                     // ToF 4 + Z == ToF 4
                     int Z2Dist = Z2 + tof_measure(TOF_4_PIN_X);
-                    while(tof_measure(TOF_4_PIN_X) < Z2Dist)
+                    while (tof_measure(TOF_4_PIN_X) < Z2Dist)
                     {
                         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
                     }
