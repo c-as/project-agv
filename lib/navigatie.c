@@ -147,7 +147,7 @@ void agv_zet_recht(RijRichting probe_muur)
     uint16_t meting = tof_measure(tof);
 
     // draai super sloom
-    rijden(RIJRICHTING_CW, 10);
+    rijden(RIJRICHTING_CW, 100);
 
     int last_diff = 0;
 
