@@ -51,9 +51,13 @@ void tof_test()
 {
     while (1)
     {
+        printf("tof 1...\n");
         printf("measurement tof 1: %i\n", tof_measure(TOF_1_PIN_X));
+        printf("tof 2...\n");
         printf("measurement tof 2: ------> %i\n", tof_measure(TOF_2_PIN_X));
+        printf("tof 3...\n");
         printf("measurement tof 3: ------------> %i\n", tof_measure(TOF_3_PIN_X));
+        printf("tof 4...\n");
         printf("measurement tof 4: ------------------> %i\n", tof_measure(TOF_4_PIN_X));
     }
 }
