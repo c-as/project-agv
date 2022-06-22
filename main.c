@@ -6,6 +6,7 @@
 #include "lib/navigatie.h"
 #include "lib/pwm.h"
 #include "lib/time.h"
+#include "lib/ldr.h"
 #include "lib/ir.h"
 
 void init()
