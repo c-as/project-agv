@@ -142,8 +142,6 @@ void agv_zet_vooruit()
 // werkt alleen als agv al ongeveer recht staat (+- 45 graden)
 void agv_zet_recht(RijRichting probe_muur)
 {
-    agv_zet_vooruit();
-
     DigitalPin tof = rijrichting_tof(probe_muur);
 
     uint16_t meting = tof_measure(tof);
@@ -272,6 +270,7 @@ void baan_wisselen()
 
 void agv_start_positie()
 {
+    agv_zet_vooruit();
     agv_zet_recht(RIJRICHTING_RECHTS);
     agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
     agv_muur_afstand(RIJRICHTING_LINKS, 10);
