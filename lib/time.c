@@ -7,7 +7,7 @@ void wacht_millis(uint32_t wait)
 {
     uint32_t start = millis();
 
-    while (millis() - start < wait)
+    while (millis() - start <= wait)
     {
         ;
     }
