@@ -12,6 +12,24 @@
 #define VOLG_DIFF_MM 2
 #define SNELHEID 8
 
+RijRichting rijrichting_omgedraaid(RijRichting ene_kant)
+{
+    switch (ene_kant)
+    {
+    case RIJRICHTING_VOORUIT:
+        return RIJRICHTING_ACHTERUIT;
+    case RIJRICHTING_ACHTERUIT:
+        return RIJRICHTING_VOORUIT;
+    case RIJRICHTING_RECHTS:
+        return RIJRICHTING_LINKS;
+    case RIJRICHTING_LINKS:
+        return RIJRICHTING_RECHTS;
+    default:
+        printf("navigatie.c error: agv_houd_midden(): incorrecte richting\n");
+        return -1;
+    }
+}
+
 // Converteer een motoren.h rijrichting naar tof sensor poort
 DigitalPin rijrichting_tof(RijRichting richting)
 {
@@ -261,24 +279,6 @@ void agv_start_positie()
     agv_zet_recht(RIJRICHTING_RECHTS);
     agv_muur_afstand(RIJRICHTING_ACHTERUIT, 10);
     agv_muur_afstand(RIJRICHTING_LINKS, 10);
-}
-
-RijRichting rijrichting_omgedraaid(RijRichting ene_kant)
-{
-    switch (ene_kant)
-    {
-    case RIJRICHTING_VOORUIT:
-        return RIJRICHTING_ACHTERUIT;
-    case RIJRICHTING_ACHTERUIT:
-        return RIJRICHTING_VOORUIT;
-    case RIJRICHTING_RECHTS:
-        return RIJRICHTING_LINKS;
-    case RIJRICHTING_LINKS:
-        return RIJRICHTING_RECHTS;
-    default:
-        printf("navigatie.c error: agv_houd_midden(): incorrecte richting\n");
-        return -1;
-    }
 }
 
 int agv_volg_rand(RijRichting rand_richting, RijRichting target_richting, uint16_t target_afstand)
