@@ -5,9 +5,12 @@
 #include <stdio.h>
 
 #define VOORUIT_DIFF_MM 50
-#define MUUR_DIFF_MM 2
-#define DUTY_MUUR 255
+#define MUUR_DIFF_MM 5
+#define DUTY_MUUR 100
 #define TARGET_STAP_MM 20
+#define RECHT_DIFF_MM 2
+#define VOLG_DIFF_MM 2
+#define SNELHEID 8
 
 // Converteer een motoren.h rijrichting naar tof sensor poort
 DigitalPin rijrichting_tof(RijRichting richting)
@@ -291,40 +294,71 @@ void agv_start_positie()
     agv_muur_afstand(RIJRICHTING_LINKS, 10);
 }
 
-void agv_start_navigatie()
+RijRichting rijrichting_omgedraaid(RijRichting ene_kant)
 {
-    uint16_t rand_afstand = tof_measure(TOF_3_PIN_X);
-    uint16_t target = 100;
-    int snelheid = 80;
+    switch (ene_kant)
+    {
+    case RIJRICHTING_VOORUIT:
+        return RIJRICHTING_ACHTERUIT;
+    case RIJRICHTING_ACHTERUIT:
+        return RIJRICHTING_VOORUIT;
+    case RIJRICHTING_RECHTS:
+        return RIJRICHTING_LINKS;
+    case RIJRICHTING_LINKS:
+        return RIJRICHTING_RECHTS;
+    default:
+        printf("navigatie.c error: agv_houd_midden(): incorrecte richting\n");
+        return -1;
+    }
+}
+
+int agv_volg_rand(RijRichting rand_richting, RijRichting target_richting, uint16_t target_afstand)
+{
+    DigitalPin tof_rand = rijrichting_tof(rand_richting);
+    DigitalPin tof_target = rijrichting_tof(target_richting);
+
+    if (!tof_rand.pin || !tof_target.pin)
+    {
+        printf("navigatie.c error: agv_volg_rand(): geen tof\n");
+        return 1;
+    }
+
+    uint16_t rand_afstand = tof_measure(tof_rand);
     int marge = 10;
     while (1)
     {
-        uint16_t meting_rand = tof_measure(TOF_3_PIN_X);
+        uint16_t meting_rand = tof_measure(tof_rand);
 
         if (abs(meting_rand - rand_afstand) < marge)
         {
-            uint16_t meting_target = tof_measure(TOF_1_PIN_X);
+            uint16_t meting_target = tof_measure(tof_target);
 
-            if (abs(meting_target - target) < marge)
+            if (abs(meting_target - target_afstand) < marge)
             {
                 rijden_stop();
+                return 0;
             }
-            else if (meting_target > target)
+            else if (meting_target > target_afstand)
             {
-                rijden(RIJRICHTING_VOORUIT, snelheid);
+                rijden(target_richting, SNELHEID);
             }
-            else if (meting_target < target)
+            else if (meting_target < target_afstand)
             {
-                rijden(RIJRICHTING_ACHTERUIT, snelheid);
+                rijden(rijrichting_omgedraaid(target_richting), SNELHEID);
             }
         }
         else if (meting_rand > rand_afstand)
         {
-            rijden(RIJRICHTING_RECHTS, snelheid);
+            rijden(rand_richting, SNELHEID);
         }
         else if (meting_rand < rand_afstand)
         {
-            rijden(RIJRICHTING_LINKS, snelheid);
+            rijden(rijrichting_omgedraaid(rand_richting), SNELHEID);
         }
     }
+}
+
+void agv_start_navigatie()
+{
+    agv_volg_rand(RIJRICHTING_TOF_3, RIJRICHTING_TOF_1, 100);
 }
