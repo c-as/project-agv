@@ -108,25 +108,7 @@ int agv_muur_afstand(RijRichting richting, int afstand_mm)
 // werkt alleen als agv recht staat en muren parallel
 int agv_muren_midden(RijRichting ene_kant)
 {
-    RijRichting andere_kant;
-    switch (ene_kant)
-    {
-    case RIJRICHTING_VOORUIT:
-        andere_kant = RIJRICHTING_ACHTERUIT;
-        break;
-    case RIJRICHTING_ACHTERUIT:
-        andere_kant = RIJRICHTING_VOORUIT;
-        break;
-    case RIJRICHTING_RECHTS:
-        andere_kant = RIJRICHTING_LINKS;
-        break;
-    case RIJRICHTING_LINKS:
-        andere_kant = RIJRICHTING_RECHTS;
-        break;
-    default:
-        printf("navigatie.c error: agv_houd_midden(): incorrecte richting\n");
-        return 1;
-    }
+    RijRichting andere_kant = rijrichting_omgedraaid(ene_kant);
 
     uint16_t meting_ene_kant = tof_measure(rijrichting_tof(ene_kant));
     uint16_t meting_andere_kant = tof_measure(rijrichting_tof(andere_kant));
