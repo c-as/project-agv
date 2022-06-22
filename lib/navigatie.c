@@ -196,15 +196,12 @@ void baan_wisselen()
     if (1)
     {
         /// ToF 1, 2 & 4 uitlezen (X)
-        tof_measure(TOF_1_PIN_X);
-        tof_measure(TOF_2_PIN_X);
         // uint16_t X = tof_measure(TOF_4_PIN_X);
         rijden(RIJRICHTING_Y_PLUS, UINT8_MAX);
         // ToF 1 < 2
         if (tof_measure(TOF_1_PIN_X) < tof_measure(TOF_2_PIN_X))
         {
             /// ToF 2 uitlezen
-            tof_measure(TOF_2_PIN_X);
             // ToF 2 < 30
             if (tof_measure(TOF_2_PIN_X) < 30)
             {
