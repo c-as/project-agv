@@ -8,6 +8,7 @@
 #include "lib/time.h"
 #include "lib/ldr.h"
 #include "lib/ir.h"
+#include "lib/interrupt.h"
 
 void init()
 {
@@ -17,6 +18,7 @@ void init()
     adc_init();
     pwm_init();
     ir_init();
+    init_interrupt();
 }
 
 void start()
