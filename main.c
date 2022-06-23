@@ -24,11 +24,14 @@ void init()
 void start()
 {
     // time_test();
-    //  tof_test();
-    ldr_volgen();
+    //tof_test();
+    //ldr_volgen();
 //    agv_start_navigatie();
+    baan_wisselen();
+   //agv_muur_afstand(RIJRICHTING_VOORUIT, 50);
     while (1)
     {
+      
     }
 }
 
