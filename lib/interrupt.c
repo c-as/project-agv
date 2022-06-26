@@ -1,17 +1,23 @@
-#include <avr/io.h>
 #include <avr/interrupt.h>
+#include "ir.h"
+#include "ldr.h"
+#include "bumper.h"
 
-void init_interrupt()
+void interrupt_init()
 {
-    EIMSK |= (1 << INT0); // enable external interrupts
-    sei();                // enable interrupts
+    TCCR1A = 0;
+    TCCR1B = (1 << CS10);  // prescaler
+    TIMSK1 = (1 << TOIE1); // overflow interrupts aan
+    sei();                 // enbale interrupts
 }
 
-void external_interrupt()
+ISR(TIMER1_OVF_vect)
 {
-}
+    TIMSK1 = 0; // zet interrupts van deze timer uit zodat er niet meerdere tegelijkertijd runnen
 
-ISR(INT0_vect)
-{
-    external_interrupt();
+    ir_check();
+    bumper_check();
+    ldr_check();
+
+    TIMSK1 = (1 << TOIE1); // overflow interrupts weer aan
 }

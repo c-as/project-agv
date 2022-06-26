@@ -1,8 +1,14 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <util/delay.h>
+#include "time.h"
 #include "pinio.h"
+
+// kijkt of de pins hetzelfde zijn
+bool vergelijk_digital_pins(DigitalPin pin_1, DigitalPin pin_2)
+{
+    return (pin_1.pDDR == pin_2.pDDR && pin_1.pPIN == pin_2.pPIN && pin_1.pPORT == pin_2.pPORT && pin_1.pin == pin_2.pin);
+}
 
 void pin_set_mode(DigitalPin pin, DigitalPinMode mode)
 {
@@ -49,8 +55,8 @@ void pinio_test()
     while (1)
     {
         pin_set_output(MEGA_PIN_A12_DIGITAL, 0);
-        _delay_ms(500);
+        wacht_millis(500);
         pin_set_output(MEGA_PIN_A12_DIGITAL, 1);
-        _delay_ms(500);
+        wacht_millis(500);
     }
 }

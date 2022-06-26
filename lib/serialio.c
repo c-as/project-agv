@@ -9,7 +9,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/setbaud.h>
-#include <util/delay.h>
+#include "time.h"
 
 int uart_putchar(char, FILE *);
 void uart_init();
@@ -50,7 +50,7 @@ void serialio_test()
     while (1)
     {
         printf("test\n");
-        _delay_ms(500);
+        wacht_millis(500);
     }
 }
 

@@ -163,6 +163,7 @@ typedef struct
     volatile uint8_t pin;
 } DigitalPin;
 
+bool vergelijk_digital_pins(DigitalPin pin_1, DigitalPin pin_2);
 void pin_set_mode(DigitalPin pin, DigitalPinMode mode);
 void pin_set_output(DigitalPin pin, bool output);
 bool pin_get_input(DigitalPin pin);

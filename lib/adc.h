@@ -1,6 +1,14 @@
 #ifndef _ADC_H_
 #define _ADC_H_
 
+#include <inttypes.h>
+
+typedef struct // pakket van data voor het gebruik van een specifieke analoge pin
+{
+    volatile uint8_t mux2;
+    volatile uint8_t mux5;
+} AnalogPin;
+
 #define MEGA_PIN_A0_ANALOG \
     (AnalogPin) { .mux2 = 0, .mux5 = 0 }
 #define MEGA_PIN_A1_ANALOG \
@@ -34,13 +42,8 @@
 #define MEGA_PIN_A15_ANALOG \
     (AnalogPin) { .mux2 = 7, .mux5 = 1 }
 
-typedef struct // pakket van data voor het gebruik van een specifieke analoge pin
-{
-    volatile uint8_t mux2;
-    volatile uint8_t mux5;
-} AnalogPin;
-
 void adc_init();
+bool vergelijk_analoge_pins(AnalogPin pin_1, AnalogPin pin_2);
 uint16_t adc_convert(AnalogPin pin);
 void adc_test();
 

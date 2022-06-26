@@ -1,37 +1,34 @@
 #include "lib/serialio.h"
-#include "lib/motoren.h"
 #include "lib/tof/tof.h"
 #include "lib/adc.h"
-#include "lib/ldr.h"
 #include "lib/navigatie.h"
-#include "lib/pwm.h"
-#include "lib/time.h"
-#include "lib/ldr.h"
 #include "lib/ir.h"
+#include "lib/motoren.h"
 #include "lib/interrupt.h"
+#include "lib/ldr.h"
+#include "lib/bumper.h"
+#include "lib/pwm.h"
 
 void init()
 {
     serialio_init();
     tof_init();
-    init_motoren();
+    motoren_init();
     adc_init();
     pwm_init();
     ir_init();
-    init_interrupt();
+    interrupt_init();
+    ldr_init();
+    bumper_init();
 }
 
 void start()
 {
-    // time_test();
-    //tof_test();
-    //ldr_volgen();
-//    agv_start_navigatie();
-    baan_wisselen();
-   //agv_muur_afstand(RIJRICHTING_VOORUIT, 50);
+    agv_start_navigatie();
+
     while (1)
     {
-      
+        ;
     }
 }
 

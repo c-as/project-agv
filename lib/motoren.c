@@ -1,9 +1,9 @@
 #include <avr/io.h>
-#include <util/delay.h>
 #include <avr/interrupt.h>
 #include "motoren.h"
 #include "pinio.h"
 #include "pwm.h"
+#include "time.h"
 
 #define PIN_IN1_MOTOR1 MEGA_PIN_D8_DIGITAL
 #define PIN_IN2_MOTOR1 MEGA_PIN_D9_DIGITAL
@@ -15,7 +15,7 @@
 #define PIN_IN2_MOTOR4 MEGA_PIN_D3_DIGITAL
 #define MOTOREN_PWM_GROUP PWMGROUP_A
 
-void init_motoren()
+void motoren_init()
 {
     pin_set_mode(PIN_IN1_MOTOR1, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(PIN_IN2_MOTOR1, PINMODE_DIGITAL_OUTPUT);
@@ -25,6 +25,9 @@ void init_motoren()
     pin_set_mode(PIN_IN2_MOTOR3, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(PIN_IN1_MOTOR4, PINMODE_DIGITAL_OUTPUT);
     pin_set_mode(PIN_IN2_MOTOR4, PINMODE_DIGITAL_OUTPUT);
+
+    current_duty = 0;
+    current_rijrichting = 0;
 }
 
 void motor_zet_richting(int motor, MotorRichting kant)
@@ -80,6 +83,7 @@ void motor_zet_richting(int motor, MotorRichting kant)
 void motor_zet_duty(uint8_t duty)
 {
     pwm_group_set_duty(MOTOREN_PWM_GROUP, duty);
+    current_duty = duty;
 }
 
 void rijden(RijRichting kant, uint8_t duty)
@@ -126,7 +130,16 @@ void rijden(RijRichting kant, uint8_t duty)
         motor_zet_richting(3, MOTORRICHTING_CW);
         motor_zet_richting(4, MOTORRICHTING_CW);
     }
+    // eerst beginnen met draaien daarna zachter
+    if (current_duty == 0)
+    {
+        motor_zet_duty(UINT8_MAX);
+        wacht_millis(100);
+    }
+
     motor_zet_duty(duty);
+
+    current_rijrichting = kant;
 }
 
 void rijden_stop()
@@ -139,16 +152,16 @@ void motoren_test()
     while (1)
     {
         rijden(RIJRICHTING_CW, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
         rijden(RIJRICHTING_CCW, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
         rijden(RIJRICHTING_VOORUIT, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
         rijden(RIJRICHTING_ACHTERUIT, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
         rijden(RIJRICHTING_LINKS, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
         rijden(RIJRICHTING_RECHTS, UINT8_MAX);
-        _delay_ms(500);
+        wacht_millis(500);
     }
 }

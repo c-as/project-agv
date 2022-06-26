@@ -1,11 +1,11 @@
-#include <stdio.h>
 #include <avr/interrupt.h>
-#include "../pinio.h"
+#include <stdio.h>
 #include "vl53l0x-non-arduino/VL53L0X.h"
-#include "vl53l0x-non-arduino/util/i2cmaster.h"
 #include "vl53l0x-non-arduino/util/millis.h"
-#include "tof.h"
+#include "vl53l0x-non-arduino/util/i2cmaster.h"
 #include "../time.h"
+#include "../pinio.h"
+#include "tof.h"
 
 #define TIMING_BUDGET_MS 50
 #define WACHTTIJD 2
@@ -45,7 +45,7 @@ uint16_t tof_measure(DigitalPin tof_x_pin)
     // zet de pin weer laag
     pin_set_mode(tof_x_pin, PINMODE_DIGITAL_OUTPUT);
 
-    return measurement / 2;
+    return measurement;
 }
 
 void tof_test()

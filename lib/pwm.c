@@ -1,7 +1,7 @@
 #include <avr/interrupt.h>
 #include "pinio.h"
+#include "time.h"
 #include "pwm.h"
-#include <util/delay.h>
 
 #define AMOUNT_PWM_PINS 8
 
@@ -145,6 +145,6 @@ void pwm_test()
         pwm_group_set_duty(PWMGROUP_B, countb);
         counta = (counta + 1) % 255;
         countb = (countb + 10) % 255;
-        _delay_ms(10);
+        wacht_millis(10);
     }
 }

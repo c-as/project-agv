@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include <util/delay.h>
 #include <avr/io.h>
+#include <stdbool.h>
+#include <inttypes.h>
+#include "time.h"
 #include "adc.h"
 
 #define DEFAULT_REF (0 << REFS1) | (1 << REFS0) // referentiespanning is avcc (5v)
@@ -11,6 +13,11 @@ void adc_init()
     ADCSRA |= (1 << ADEN);                               // zet adc aan
 }
 
+bool vergelijk_analoge_pins(AnalogPin pin_1, AnalogPin pin_2)
+{
+    return (pin_1.mux2 == pin_2.mux2 && pin_1.mux5 == pin_2.mux5);
+}
+
 // geeft een getal tussen de 0 (= 0v) en de 1024 (= 5v)
 uint16_t adc_convert(AnalogPin pin)
 {
@@ -19,6 +26,7 @@ uint16_t adc_convert(AnalogPin pin)
     ADCSRA |= (1 << ADSC);                     // start conversie
     while (ADCSRA & (1 << ADSC))               // wacht totdat conversie klaar is
     {
+        ;
     }
     return ADC;
 }
@@ -29,6 +37,6 @@ void adc_test()
     while (1)
     {
         printf("adc measurement: %i\n", adc_convert(MEGA_PIN_A15_ANALOG));
-        _delay_ms(500);
+        wacht_millis(500);
     }
 }

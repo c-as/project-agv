@@ -1,6 +1,7 @@
+#ifndef _MOTOREN_H_
+#define _MOTOREN_H_
 
-#ifndef _motorenDefines_H_
-#define _motorenDefines_H_
+#include <inttypes.h>
 
 #define RIJRICHTING_X_PLUS RIJRICHTING_VOORUIT
 #define RIJRICHTING_X_MIN RIJRICHTING_ACHTERUIT
@@ -28,7 +29,10 @@ typedef enum
     MOTORRICHTING_CCW,
 } MotorRichting;
 
-void init_motoren();
+int current_duty;
+int current_rijrichting;
+
+void motoren_init();
 void motor_zet_richting(int motor, MotorRichting kant);
 void motor_zet_duty(uint8_t duty);
 void rijden(RijRichting kant, uint8_t duty);
