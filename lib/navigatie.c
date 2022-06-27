@@ -146,7 +146,7 @@ int agv_naar_rand(RijRichting rand_richting, uint16_t target_afstand)
         {
             rijden(rand_richting, snelheid_rand);
         }
-        else if (meting_rand < target_afstand)
+        else
         {
             rijden(rijrichting_tegenovergesteld(rand_richting), snelheid_rand);
         }
