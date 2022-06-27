@@ -24,6 +24,8 @@ void init()
 
 void start()
 {
+
+    // tof_test();
     agv_start_navigatie();
 
     while (1)
