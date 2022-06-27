@@ -12,10 +12,10 @@
 #define LDR_VOOR_LINKS PIN_LDR1
 #define LDR_VOOR_RECHTS PIN_LDR2
 
-#define MIN_VERSCHIL 500
-#define MIN_LICHT 200
+#define MIN_VERSCHIL 170
+#define MIN_LICHT 150
 #define MIN_AFSTAND_MM 100
-#define VOLG_SNELHEID 100
+#define VOLG_SNELHEID 90
 #define DRAAI_SNELHEID 100
 
 volatile bool was_volgen = false;
