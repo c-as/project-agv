@@ -155,11 +155,51 @@ int agv_naar_rand(RijRichting rand_richting, uint16_t target_afstand)
 
 void agv_start_navigatie()
 {
+    IR_LINKS_ENABLED = false;
+    IR_RECHTS_ENABLED = false;
+
     while (1)
     {
-        agv_naar_rand(RIJRICHTING_VOORUIT, 100);
+        // zet voor baan
+        agv_naar_rand(RIJRICHTING_LINKS, 120);
         wacht_millis(2000);
-        agv_naar_rand(RIJRICHTING_ACHTERUIT, 100);
+
+        // // rij in baan 1
+        IR_RECHTS_ENABLED = true;
+        agv_naar_rand(RIJRICHTING_VOORUIT, 200);
+        wacht_millis(2000);
+
+        // baan wisselen 2
+        IR_LINKS_ENABLED = false;
+        IR_RECHTS_ENABLED = false;
+        agv_naar_rand(RIJRICHTING_LINKS, 400);
+        wacht_millis(2000);
+
+        // rij in baan 2
+        IR_RECHTS_ENABLED = true;
+        agv_naar_rand(RIJRICHTING_ACHTERUIT, 200);
+        wacht_millis(2000);
+
+        // baan wissel 3
+        IR_LINKS_ENABLED = false;
+        IR_RECHTS_ENABLED = false;
+        agv_naar_rand(RIJRICHTING_LINKS, 610);
+        wacht_millis(2000);
+
+        // rij in baan 3
+        IR_RECHTS_ENABLED = true;
+        agv_naar_rand(RIJRICHTING_VOORUIT, 200);
+        wacht_millis(2000);
+
+        // baan wissel 4
+        IR_LINKS_ENABLED = false;
+        IR_RECHTS_ENABLED = false;
+        agv_naar_rand(RIJRICHTING_RECHTS, 80);
+        wacht_millis(2000);
+
+        // rij in baan 4
+        IR_LINKS_ENABLED = true;
+        agv_naar_rand(RIJRICHTING_ACHTERUIT, 200);
         wacht_millis(2000);
     }
 }
