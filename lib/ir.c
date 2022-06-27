@@ -2,6 +2,7 @@
 #include "motoren.h"
 #include "pinio.h"
 #include "time.h"
+#include "ir.h"
 
 #define IR_1 MEGA_PIN_D31_DIGITAL
 #define IR_2 MEGA_PIN_D30_DIGITAL
@@ -9,11 +10,6 @@
 #define IR_LINKS IR_1
 #define IR_RECHTS IR_2
 
-volatile bool ir_1_enabled;
-volatile bool ir_2_enabled;
-
-#define IR_LINKS_ENABLED ir_1_enabled
-#define IR_RECHTS_ENABLED ir_2_enabled
 #define WACHTTIJD_BOOM_MS 2000
 
 volatile bool last_ir_1 = false;
