@@ -3,8 +3,10 @@
 #include "tof/tof.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "time.h"
 #include "motoren.h"
+#include "ir.h"
 
 #define SNELHEID_VOOR 90
 #define SNELHEID_ZIJ 110
