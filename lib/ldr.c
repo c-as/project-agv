@@ -64,7 +64,8 @@ void ldr_vergelijken()
 
 void ldr_volgen()
 {
-    if (tof_measure(TOF_VOOR) > MIN_AFSTAND_MM)
+    // if (tof_measure(TOF_VOOR) > MIN_AFSTAND_MM)
+    if (1)
     {
         ldr_vergelijken();
     }
