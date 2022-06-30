@@ -1,29 +1,22 @@
-#include <avr/io.h>
-
-
-#define led_aan_rood        PORTG |= (1 << PG0)
-#define led_aan_blauw       PORTG |= (1 << PG2)
-#define led_uit_rood        PORTG &= ~(1 << PG0)
-#define led_uit_blauw       PORTG &= ~(1 << PG2)
+#include "pinio.h"
 
 void led_init()
 {
-    DDRG &= ~(1 << PG0);
-    DDRG &= ~(1 << PG2);
+    pin_set_mode(MEGA_PIN_D39_DIGITAL, PINMODE_DIGITAL_OUTPUT);
+    pin_set_mode(MEGA_PIN_D43_DIGITAL, PINMODE_DIGITAL_OUTPUT);
 }
-
 
 void led_check(int stand)
 {
-    if(stand)
+    if (stand)
     {
-        led_aan_blauw;
-        led_aan_rood;
+        pin_set_output(MEGA_PIN_D39_DIGITAL, 1);
+        pin_set_output(MEGA_PIN_D43_DIGITAL, 1);
     }
-    else if(stand == 0)
+    else if (stand == 0)
     {
-        led_uit_blauw;
-        led_uit_rood;
+
+        pin_set_output(MEGA_PIN_D39_DIGITAL, 0);
+        pin_set_output(MEGA_PIN_D43_DIGITAL, 0);
     }
 }
-

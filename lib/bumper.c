@@ -2,6 +2,7 @@
 #include "motoren.h"
 #include "bumper.h"
 #include "time.h"
+#include "led.h"
 
 #define BUMPER_VRIJ_WACHTTIJD_MS 2000
 #define BUMPER_PIN MEGA_PIN_D52_DIGITAL
@@ -23,11 +24,14 @@ void bumper_check()
         while (pin_get_input(BUMPER_PIN))
         {
             rijden_stop();
+            led_check(1);
         }
 
         // wacht even voordat we weer gaan rijden
         wacht_millis(BUMPER_VRIJ_WACHTTIJD_MS);
 
         rijden(vorige_rijrichting, vorige_duty);
+
+        led_check(0);
     }
 }

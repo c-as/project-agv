@@ -4,6 +4,7 @@
 #include "time.h"
 #include "stdlib.h"
 #include "adc.h"
+#include "led.h"
 
 // op het moment alleen de voorste 2
 #define PIN_LDR1 MEGA_PIN_A8_ANALOG
@@ -83,11 +84,13 @@ void ldr_check()
         was_volgen = true;
 
         ldr_volgen();
+        ldr_check(1);
     }
     if (was_volgen)
     {
         was_volgen = false;
         rijden_stop();
         wacht_millis(2000);
+        ldr_check(0);
     }
 }

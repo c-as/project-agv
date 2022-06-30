@@ -7,6 +7,7 @@
 #include "time.h"
 #include "motoren.h"
 #include "ir.h"
+#include "led.h"
 
 #define SNELHEID_VOOR 90
 #define SNELHEID_ZIJ 110
@@ -164,44 +165,60 @@ void agv_start_navigatie()
     {
         // zet voor baan
         agv_naar_rand(RIJRICHTING_LINKS, 120);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // // rij in baan 1
         IR_RECHTS_ENABLED = true;
         agv_naar_rand(RIJRICHTING_VOORUIT, 200);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // baan wisselen 2
         IR_LINKS_ENABLED = false;
         IR_RECHTS_ENABLED = false;
         agv_naar_rand(RIJRICHTING_LINKS, 400);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // rij in baan 2
         IR_RECHTS_ENABLED = true;
         agv_naar_rand(RIJRICHTING_ACHTERUIT, 200);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // baan wissel 3
         IR_LINKS_ENABLED = false;
         IR_RECHTS_ENABLED = false;
         agv_naar_rand(RIJRICHTING_LINKS, 610);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // rij in baan 3
         IR_RECHTS_ENABLED = true;
         agv_naar_rand(RIJRICHTING_VOORUIT, 200);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // baan wissel 4
         IR_LINKS_ENABLED = false;
         IR_RECHTS_ENABLED = false;
         agv_naar_rand(RIJRICHTING_RECHTS, 80);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
 
         // rij in baan 4
         IR_LINKS_ENABLED = true;
         agv_naar_rand(RIJRICHTING_ACHTERUIT, 200);
+        led_check(1);
         wacht_millis(2000);
+        led_check(0);
     }
 }
