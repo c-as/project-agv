@@ -8,6 +8,7 @@
 #include "lib/ldr.h"
 #include "lib/bumper.h"
 #include "lib/pwm.h"
+#include "lib/led.h"
 
 void init()
 {
@@ -20,6 +21,7 @@ void init()
     interrupt_init();
     ldr_init();
     bumper_init();
+    led_init();
 }
 
 void start()
